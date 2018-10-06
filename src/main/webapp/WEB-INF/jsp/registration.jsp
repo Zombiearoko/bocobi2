@@ -16,29 +16,29 @@
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     
     <!-- Theme Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
     
     <!-- Current Page Styles -->
-    <link rel="stylesheet" type="text/css" href="components/jquery.bxslider/jquery.bxslider.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/components/jquery.bxslider/jquery.bxslider.css" media="screen" />
     
     <!-- Main Style -->
-    <link id="main-style" rel="stylesheet" href="css/style.css">
+    <link id="main-style" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
     
     <!-- Updated Styles -->
-    <link rel="stylesheet" href="css/updates.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/updates.css">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/custom.css">
     
     <!-- Responsive Styles -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css">
     
     <!-- CSS for IE -->
     <!--[if lte IE 9]>
-        <link rel="stylesheet" type="text/css" href="css/ie.css" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ie.css" />
     <![endif]-->
     
 
@@ -166,31 +166,31 @@
     </div>
 
     <!-- Javascript -->
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.noconflict.js"></script>
-    <script type="text/javascript" src="js/modernizr.2.7.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.placeholder.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.1.10.4.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.noconflict.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modernizr.2.7.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.placeholder.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.1.10.4.min.js"></script>
     
     <!-- Twitter Bootstrap -->
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
     
     <!-- load revolution slider scripts -->
-    <script type="text/javascript" src="components/revolution_slider/js/jquery.themepunch.tools.min.js"></script>
-    <script type="text/javascript" src="components/revolution_slider/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/revolution_slider/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/revolution_slider/js/jquery.themepunch.revolution.min.js"></script>
     
     <!-- load BXSlider scripts -->
-    <script type="text/javascript" src="components/jquery.bxslider/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/jquery.bxslider/jquery.bxslider.min.js"></script>
     
     <!-- parallax -->
-    <script type="text/javascript" src="js/jquery.stellar.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.stellar.min.js"></script>
     
     <!-- waypoint -->
-    <script type="text/javascript" src="js/waypoints.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/waypoints.min.js"></script>
 
     <!-- load page Javascript -->
-    <script type="text/javascript" src="js/theme-scripts.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/theme-scripts.js"></script>
 </body>
 </html>
 
