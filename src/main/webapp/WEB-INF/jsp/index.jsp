@@ -81,7 +81,7 @@
                     <div class="page-title pull-left">
                         <h2 class="entry-title">Before You Fly</h2>
                     </div>
-                    <button class="btn-medium sky-blue1">SIGNUP</button>
+                    <a href="${pageContext.request.contextPath}/registration"><button class="btn-medium sky-blue1">SINGUP</button></a>
                     <button class="btn-medium">LOGIN</button>
                 </div>
             </div>
