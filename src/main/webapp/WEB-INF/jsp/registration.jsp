@@ -1,21 +1,207 @@
-    <jsp:include page="../partials/header.jsp"></jsp:include>
+ 		<jsp:include page="../partials/header.jsp"></jsp:include>
+	        <div class="page-title-container style1">
+		        <div class="container">
+		            <div class="page-title pull-left">
+		                <h2 class="entry-title">Choisissez une action</h2>
+		            </div>
+		            <a href="${pageContext.request.contextPath}/registration"><button class="btn-medium sky-blue1">Inscription</button></a>
+		            <a href="${pageContext.request.contextPath}/connection"><button class="btn-medium">Connexion</button></a>
+		        </div>
+		    </div>
+
+		</header>
         <section id="content" class="gray-area">
             <div class="container shortcode">              
                 <div class="block">
                     <h2>Inscription</h2>
                     <div class="tab-container full-width-style white-bg">
                         <ul class="tabs">
-                            <li class="active"><a href="#first-tab" data-toggle="tab"><i class="soap-icon-anchor circle"></i>Chercheur d'emploi</a></li>
-                            <li><a href="#second-tab" data-toggle="tab"><i class="soap-icon-user circle"></i>Offreur d'emploi</a></li>
+                            <li class="active"><a href="#first-tab" data-toggle="tab"><i class="soap-icon-user circle"></i>Chercheur d'emploi</a></li>
+                            <li><a href="#second-tab" data-toggle="tab"><i class="soap-icon-bag circle"></i>Offreur d'emploi</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="first-tab">
-                                <h2 class="tab-content-title">Hi First Tab Text</h2>
-                                <p>Nam volutpat aliquam sem, in tristique felis luctus consectetur. In molestie quis velit eget mattis. Vivamus libero eros, euismod at bibendum vel, aliquet a nunc. Proin viverra eleifend metus, sit amet bibendum orci. sed eget semper odio. mauris fermentum porttitor augue eu vehicula. quisque congue velit turpis, sit amet interdum quam facilisis in. Proin venenatis purus a ipsum porttitor, sed cursus libero bibendum. aenean auctor felis et sagittis egestas. Donec lobortis, est dictum dictum molestie, dolor massa pulvinar quam, vel malesuada nisi magna a nulla. </p>
-                                <p>Sed fringilla volutpat mauris sed dictum etiam a volutpat dui, et dignissim nisi. morbi ipsum risus, adipiscing imperdiet fermentum ac, consequat sed ante. In velit diam commodo tempor molestie et, congue ac augue. nam dignissim neque commodo sem ullamcorper, nec luctus nisi faucibus. Aliquam tincidunt ullamcorper velit vestibulum lacinia. morbi convallis justo sed tincidunt scelerisque. Integer porttitor consectetur ante. Mauris pretium dolor arcu, quis imperdiet felis semper nec unc arcu urna, aliquam nec erat at, facilisis dignissim velit. Phasellus vitae elementum sem, ac mollis magna. Ut pharetra tellus vel mi bibendum vel aliquam nisi scelerisque Pellentesque elementum porttitor dui facilisis luctus. </p>
+                                <form class="booking-form" method="post" action="">
+	                                <div class="person-information">
+	                                    <h2>Vos informations personnelles (Chercheur d'emploi)</h2>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Nom <span color: red;> *</span></label>
+	                                            <input type="text" required name="NOM" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Prenom <span color: red;> *</span></label>
+	                                            <input type="text" required name="PRENOM" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Sexe <span color: red;> *</span></label>
+												<div class="selector">
+	                                                <select required name="SEXE" class="full-width">
+	                                                    <option value=""></option>
+	                                                    <option value="H">Homme</option>
+	                                                    <option value="F">Femme</option>
+	                                                </select>
+	                                            </div>	
+                                            </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Statut marital <span color: red;> *</span></label>
+	                                            <div class="selector">
+	                                                <select required name="STATUTMARITAL" class="full-width">
+	                                                    <option value=""></option>
+	                                                    <option value="CELIBATAIRE">Celibataire</option>
+	                                                    <option value="MARIE">Marié</option>
+	                                                    <option value="DIVORCE">Divorcé</option>
+	                                                    <option value="VEUF">Veuf</option>
+	                                                </select>
+	                                            </div>	
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Nature contrat <span color: red;> *</span></label>
+	                                            <div class="selector">
+	                                                <select required name="NATURECONTRAT" class="full-width">
+	                                                    <option value=""></option>
+	                                                    <option value="CDD">CDD</option>
+	                                                    <option value="CDI">CDI</option>
+	                                                    <option value="FREELANCE">Freelance</option>
+	                                                    <option value="STAGE">Stage</option>
+	                                                </select>
+	                                            </div>
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Niveau d'etude <span color: red;> *</span></label>
+	                                            <div class="selector">
+	                                                <select required name="NIVEAUETUDE" class="full-width">
+	                                                    <option value=""></option>
+	                                                    <option value="CEP">CEP</option>
+	                                                    <option value="BEPC">BEPC</option>
+	                                                    <option value="PROBATOIRE">PROBATOIRE</option>
+	                                                    <option value="BAC">BAC</option>
+	                                                    <option value="BAC1">BAC + 1</option>
+	                                                    <option value="BAC2">BAC + 2</option>
+	                                                    <option value="BAC3">BAC + 3</option>
+	                                                    <option value="BAC4">BAC + 4</option>
+	                                                    <option value="BAC5">BAC + 5</option>
+	                                                    <option value="BAC6">BAC + 6</option>
+	                                                    <option value="BAC7">BAC + 7</option>
+	                                                    <option value="BAC8">BAC + 8</option>
+	                                                    <option value="BAC8+">BAC + 8 plus...</option>
+	                                                </select>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Anciennété <span color: red;> *</span></label>
+	                                            <div class="selector">
+	                                                <select required name="ANCIENNETE" class="full-width">
+	                                                    <option value=""></option>
+	                                                    <option value="6mois">6 mois</option>
+	                                                    <option value="1ans">1 ans</option>
+	                                                    <option value="2ans">2 ans</option>
+	                                                    <option value="5ans">5 ans</option>
+	                                                    <option value="5ans+">Plus de 5 ans</option>
+                                                    </select>
+	                                            </div>
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Duree contrat souhaitée <span color: red;> *</span></label>
+	                                            <div class="selector">
+	                                                <select required name="DUREECONTRATSOUHAITE" class="full-width">
+	                                                    <option value=""></option>
+	                                                    <option value="6mois">6 mois</option>
+	                                                    <option value="1ans">1 ans</option>
+	                                                    <option value="2ans">2 ans</option>
+	                                                    <option value="5ans">5 ans</option>
+	                                                    <option value="5ans+">Plus de 5 ans</option>
+                                                    </select>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Login <span color: red;> *</span></label>
+	                                            <input type="text" name="LOGIN" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Mot de passe <span color: red;> *</span></label>
+	                                            <input type="password" required name="PASSWORD" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Telephone <span color: red;> *</span></label>
+	                                            	<input type="number" required name="TELEPHONE" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Adresse mail <span color: red;> *</span></label>
+	                                            <input type="email" required name="EMAIL" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+		                                    <div class="col-sm-10 col-md-10">
+		                                        <button type="submit" class="full-width btn-large">Je m'inscris</button>
+		                                    </div>
+		                                </div>
+	                                </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="second-tab">
-                                <h2 class="tab-content-title">Second Tab</h2>
+                                <form class="booking-form" method="post" action="">
+	                                <div class="person-information">
+	                                    <h2>Vos informations (Offreur d'emploi)</h2>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Raison sociale <span color: red;> *</span></label>
+	                                            <input type="text" required name="RAISONSOCIALE" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Situation geograhique <span color: red;> *</span></label>
+	                                            <input type="text" required name="SITUATIONGEOGRAPHIQUE" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Login <span color: red;> *</span></label>
+	                                            <input type="text" name="LOGIN" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Mot de passe <span color: red;> *</span></label>
+	                                            <input type="password" required name="PASSWORD" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Telephone <span color: red;> *</span></label>
+	                                            	<input type="number" required name="TELEPHONE" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                        <div class="col-sm-6 col-md-5">
+	                                            <label>Adresse mail <span color: red;> *</span></label>
+	                                            <input type="email" required name="EMAIL" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-10 col-md-10">
+	                                            <label>Adresse <span color: red;> *</span></label>
+	                                            <input type="text" required name="ADRESSE" class="input-text full-width" value="" placeholder="" />
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+	                                        <div class="col-sm-10 col-md-10">
+	                                            <label>Description</label>
+												<textarea rows="10" cols="" style="width: 100%;"></textarea>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group row">
+		                                    <div class="col-sm-10 col-md-10">
+		                                        <button type="submit" class="full-width btn-large">Je m'inscris</button>
+		                                    </div>
+		                                </div>
+	                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -23,79 +209,7 @@
                 
             </div>
         </section>
-
-        <footer id="footer">
-            <div class="section global-map-area">
-                <div class="container">
-                    <div class="row add-clearfix">
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 small-box">
-                                <i class="soap-icon-friends"></i>
-                                <div class="description">
-                                    <h4>Plan Your Tours</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 animated small-box">
-                                <i class="soap-icon-insurance"></i>
-                                <div class="description">
-                                    <h4>Low Rate Packages</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 animated small-box">
-                                <i class="soap-icon-insurance"></i>
-                                <div class="description">
-                                    <h4>Travel Insurance</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 animated small-box">
-                                <i class="soap-icon-guideline"></i>
-                                <div class="description">
-                                    <h4>Travel Guidelines</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Javascript -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.noconflict.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modernizr.2.7.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.placeholder.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.1.10.4.min.js"></script>
-    
-    <!-- Twitter Bootstrap -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
-    
-    <!-- load revolution slider scripts -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/revolution_slider/js/jquery.themepunch.tools.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/revolution_slider/js/jquery.themepunch.revolution.min.js"></script>
-    
-    <!-- load BXSlider scripts -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/jquery.bxslider/jquery.bxslider.min.js"></script>
-    
-    <!-- parallax -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.stellar.min.js"></script>
-    
-    <!-- waypoint -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/waypoints.min.js"></script>
-
-    <!-- load page Javascript -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/theme-scripts.js"></script>
+    <<jsp:include page="../partials/JSImport.jsp"></jsp:include>
 </body>
 </html>
 

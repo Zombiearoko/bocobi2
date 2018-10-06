@@ -1,4 +1,15 @@
-    <jsp:include page="../partials/header.jsp"></jsp:include>
+ 		<jsp:include page="../partials/header.jsp"></jsp:include>
+	        <div class="page-title-container style1">
+		        <div class="container">
+		            <div class="page-title pull-left">
+		                <h2 class="entry-title">Choisissez une action</h2>
+		            </div>
+		            <a href="${pageContext.request.contextPath}/registration"><button class="btn-medium sky-blue1">Inscription</button></a>
+		            <a href="${pageContext.request.contextPath}/connection"><button class="btn-medium">Connexion</button></a>
+		        </div>
+		    </div>
+
+		</header>
         <section id="content" class="gray-area">
             <div class="container">
                 <div id="main">
@@ -6,15 +17,17 @@
                     <p class="light-blue-color block" style="font-size: 1.3333em; text-align: center;">Connectez vous a votre compte.</p>
                     <div class="col-sm-8 col-md-6 col-lg-5 no-float no-padding center-block">
                        
-                       <div class="col-md-12 center-block">
-		                    <div class="alert alert-error">
-		                        Erreur de connexion. Login ou mot de passe erroné !
-		                        <span class="close"></span>
-		                    </div>
-                    	</div>
+					    <c:if test="${error eq 'bonjour'}">
+					        <div class="alert alert-error center-block">
+                               Error Message. Your Message Comes Here
+                               <span class="close"></span>
+                          	</div>
+					    </c:if>    
+						    
+						
                         <form class="login-form" style="border: 1px 1px 1px solid black;" method="post" action="${pageContext.request.contextPath}/connection">
                             <div class="form-group">
-                                <input type="text" class="input-text input-large full-width" name="login" placeholder="entrez votre login" required>
+                                <input type="text" class="input-text input-large full-width" value="${ not empty oldLogin ? oldLogin : '' }"name="login" placeholder="entrez votre login" required>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="input-text input-large full-width" name="motdepasse" placeholder="entrez votre mot de passe" required>
@@ -31,51 +44,6 @@
             </div>
         </section>
 
-        <footer id="footer">
-            <div class="section global-map-area">
-                <div class="container">
-                    <div class="row add-clearfix">
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 small-box">
-                                <i class="soap-icon-friends"></i>
-                                <div class="description">
-                                    <h4>Plan Your Tours</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 animated small-box">
-                                <i class="soap-icon-insurance"></i>
-                                <div class="description">
-                                    <h4>Low Rate Packages</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 animated small-box">
-                                <i class="soap-icon-insurance"></i>
-                                <div class="description">
-                                    <h4>Travel Insurance</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="icon-box style6 animated small-box">
-                                <i class="soap-icon-guideline"></i>
-                                <div class="description">
-                                    <h4>Travel Guidelines</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
     <jsp:include page="../partials/JSImport.jsp"></jsp:include>
 </body>
 </html>

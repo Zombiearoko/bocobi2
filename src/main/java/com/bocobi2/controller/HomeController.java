@@ -15,7 +15,8 @@ import com.bocobi2.dao.ArticleDAO;
  *
  */
 @Controller
-public class HomeController{
+public class HomeController
+{
 
 	@Autowired
 	private ArticleDAO articleDAO;
