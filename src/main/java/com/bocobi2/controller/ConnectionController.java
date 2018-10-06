@@ -33,6 +33,7 @@ public class ConnectionController
 		} else
 		{
 			req.setAttribute("error", "error");
+			req.setAttribute("oldLogin", login);
 			return "connection";
 		}
 	}
