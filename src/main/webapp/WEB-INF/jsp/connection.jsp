@@ -4,13 +4,19 @@
                 <div id="main">
                     <div class="text-center yellow-color box" style="font-size: 4em; font-weight: 300; line-height: 1em;">Bienvenue !</div>
                     <p class="light-blue-color block" style="font-size: 1.3333em; text-align: center;">Connectez vous a votre compte.</p>
+                    <div class="col-md-5 no-padding center-block">
+	                    <div class="alert alert-error">
+	                        Error Message. Your Message Comes Here
+	                        <span class="close"></span>
+	                    </div>
+                    </div>
                     <div class="col-sm-8 col-md-6 col-lg-5 no-float no-padding center-block">
-                        <form class="login-form" style="border: 1px 1px 1px solid black;">
+                        <form class="login-form" style="border: 1px 1px 1px solid black;" method="post" action="${pageContext.request.contextPath}/connection">
                             <div class="form-group">
-                                <input type="text" class="input-text input-large full-width" name="login" placeholder="entrez votre login">
+                                <input type="text" class="input-text input-large full-width" name="login" placeholder="entrez votre login" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="input-text input-large full-width" name="motdepasse" placeholder="entrez votre mot de passe">
+                                <input type="text" class="input-text input-large full-width" name="motdepasse" placeholder="entrez votre mot de passe" required>
                             </div>
                             <div class="form-group">
                                 <label class="checkbox">
