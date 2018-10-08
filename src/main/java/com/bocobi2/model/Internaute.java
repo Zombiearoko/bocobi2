@@ -14,7 +14,7 @@ import java.util.*;
 
 
 public  class Internaute { 
-	private String idUtilisateur;
+	private Integer idUtilisateur;
 	private String role;
 	private String login;
 	private String password;
@@ -25,8 +25,21 @@ public  class Internaute {
 	
 	private Set<Role> roles;
 
-	public Internaute(String idUtilisateur, String role, String login, String password, String telephone,
+	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone,
 			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles) {
+		super();
+		this.idUtilisateur = idUtilisateur;
+		this.role = role;
+		this.login = login;
+		this.password = password;
+		this.telephone = telephone;
+		this.email = email;
+		this.detenir = detenir;
+		this.effectuer = effectuer;
+		this.roles = roles;
+	}
+	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone,
+			String email) {
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.role = role;
@@ -44,14 +57,14 @@ public  class Internaute {
 	/**
 	 * @return the idUtilisateur
 	 */
-	public String getIdUtilisateur() {
+	public Integer getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
 	/**
 	 * @param idUtilisateur the idUtilisateur to set
 	 */
-	public void setIdUtilisateur(String idUtilisateur) {
+	public void setIdUtilisateur(Integer idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
 

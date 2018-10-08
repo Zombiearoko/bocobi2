@@ -13,7 +13,7 @@ import java.util.*;
 
 
 public  class ChercheurEmploi  extends Internaute { 
-	public ChercheurEmploi(String idUtilisateur, String role, String login, String password, String telephone,
+	public ChercheurEmploi(Integer idUtilisateur, String role, String login, String password, String telephone,
 			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles) {
 		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles);
 		// TODO Auto-generated constructor stub

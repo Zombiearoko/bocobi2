@@ -10,6 +10,7 @@
     <title>Bocobi2</title>
     
     <!-- Meta Tags -->
+    
     <meta charset="utf-8">
     <meta name="keywords" content="Emploi Cameroun Cameroon Recherche" />
     <meta name="author" content="BOCOBI2">

@@ -26,24 +26,24 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="first-tab">
-                                <form class="booking-form" method="post" action="">
+                                <form class="booking-form" method="post" action="${pageContext.request.contextPath}/registration">
 	                                <div class="person-information">
 	                                    <h2>Vos informations personnelles (Chercheur d'emploi)</h2>
 	                                    <div class="form-group row">
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Nom <span color: red;> *</span></label>
-	                                            <input type="text" required name="NOM" class="input-text full-width" value="" placeholder="" />
+	                                            <input type="text" required name="nom" class="input-text full-width" value="" placeholder="" />
 	                                        </div>
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Prenom <span color: red;> *</span></label>
-	                                            <input type="text" required name="PRENOM" class="input-text full-width" value="" placeholder="" />
+	                                            <input type="text" required name="prenom" class="input-text full-width" value="" placeholder="" />
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Sexe <span color: red;> *</span></label>
 												<div class="selector">
-	                                                <select required name="SEXE" class="full-width">
+	                                                <select required name="sexe" class="full-width">
 	                                                    <option value=""></option>
 	                                                    <option value="H">Homme</option>
 	                                                    <option value="F">Femme</option>
@@ -53,7 +53,7 @@
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Statut marital <span color: red;> *</span></label>
 	                                            <div class="selector">
-	                                                <select required name="STATUTMARITAL" class="full-width">
+	                                                <select required name="maritalStatus" class="full-width">
 	                                                    <option value=""></option>
 	                                                    <option value="CELIBATAIRE">Celibataire</option>
 	                                                    <option value="MARIE">Marié</option>
@@ -67,7 +67,7 @@
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Nature contrat <span color: red;> *</span></label>
 	                                            <div class="selector">
-	                                                <select required name="NATURECONTRAT" class="full-width">
+	                                                <select required name="contactNature" class="full-width">
 	                                                    <option value=""></option>
 	                                                    <option value="CDD">CDD</option>
 	                                                    <option value="CDI">CDI</option>
@@ -79,7 +79,7 @@
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Niveau d'etude <span color: red;> *</span></label>
 	                                            <div class="selector">
-	                                                <select required name="NIVEAUETUDE" class="full-width">
+	                                                <select required name="studyLevel" class="full-width">
 	                                                    <option value=""></option>
 	                                                    <option value="CEP">CEP</option>
 	                                                    <option value="BEPC">BEPC</option>
@@ -102,7 +102,7 @@
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Anciennété <span color: red;> *</span></label>
 	                                            <div class="selector">
-	                                                <select required name="ANCIENNETE" class="full-width">
+	                                                <select required name="seniority" class="full-width">
 	                                                    <option value=""></option>
 	                                                    <option value="6mois">6 mois</option>
 	                                                    <option value="1ans">1 ans</option>
@@ -115,7 +115,7 @@
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Duree contrat souhaitée <span color: red;> *</span></label>
 	                                            <div class="selector">
-	                                                <select required name="DUREECONTRATSOUHAITE" class="full-width">
+	                                                <select required name="timeOfContact" class="full-width">
 	                                                    <option value=""></option>
 	                                                    <option value="6mois">6 mois</option>
 	                                                    <option value="1ans">1 ans</option>
@@ -129,21 +129,21 @@
 	                                    <div class="form-group row">
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Login <span color: red;> *</span></label>
-	                                            <input type="text" name="LOGIN" class="input-text full-width" value="" placeholder="" />
+	                                            <input type="text" name="login" class="input-text full-width" value="" placeholder="" />
 	                                        </div>
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Mot de passe <span color: red;> *</span></label>
-	                                            <input type="password" required name="PASSWORD" class="input-text full-width" value="" placeholder="" />
+	                                            <input type="password" required name="password" class="input-text full-width" value="" placeholder="" />
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Telephone <span color: red;> *</span></label>
-	                                            	<input type="number" required name="TELEPHONE" class="input-text full-width" value="" placeholder="" />
+	                                            	<input type="number" required name="phone" class="input-text full-width" value="" placeholder="" />
 	                                        </div>
 	                                        <div class="col-sm-6 col-md-5">
 	                                            <label>Adresse mail <span color: red;> *</span></label>
-	                                            <input type="email" required name="EMAIL" class="input-text full-width" value="" placeholder="" />
+	                                            <input type="email" required name="email" class="input-text full-width" value="" placeholder="" />
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
