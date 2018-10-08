@@ -44,7 +44,7 @@
         </footer>
     </div>
 <!-- Javascript -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+   	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-2.0.2.min.js"></script> 
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.noconflict.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modernizr.2.7.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-migrate-1.2.1.min.js"></script>
@@ -70,8 +70,11 @@
     <!-- load page Javascript -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/theme-scripts.js"></script>
 
+ 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script> 
+ 	<script src="${pageContext.request.contextPath}/resources/js/jquery.dataTables.min.js"></script> 
+    <script src="${pageContext.request.contextPath}/resources/js/dataTables.bootstrap.min.js"></script> -->
     <script type="text/javascript">
-        tjq("#slideshow .flexslider").flexslider({
+        $("#slideshow .flexslider").flexslider({
             animation: "fade",
             controlNav: false,
             animationLoop: true,
@@ -79,6 +82,13 @@
             slideshow: true,
             slideshowSpeed: 5000
         });
+        
+    </script>
+     	
+ 	<script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
     </script>
         
     <script type="text/javascript">

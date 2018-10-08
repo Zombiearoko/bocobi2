@@ -1,15 +1,20 @@
- 		<jsp:include page="../partials/header.jsp"></jsp:include>
-	        <div class="page-title-container style1">
-		        <div class="container">
-		            <div class="page-title pull-left">
-		                <h2 class="entry-title">Choisissez une action</h2>
-		            </div>
-		            <a href="${pageContext.request.contextPath}/registration"><button class="btn-medium sky-blue1">Inscription</button></a>
-		            <a href="${pageContext.request.contextPath}/connection"><button class="btn-medium">Connexion</button></a>
-		        </div>
-		    </div>
-
-		</header>
+ 	<jsp:include page="../partials/header.jsp"></jsp:include>
+        <div class="page-title-container style6" style="background-color: #337ab7;">
+            <div class="container">
+                <div class="page-title">
+                    <h2 class="entry-title" style="color: yellow;">Connexion</h2>
+                </div>
+                <ul class="breadcrumbs"><!-- 
+                    <li><a href="#">Toutes categories</a></li>
+                    <li><a href="#">Tout types</a></li>
+                    <li><a href="#">Partout</a></li> -->
+                </ul>
+                <div class="col-md-3 search-box hidden-xs">
+                    <a href="${pageContext.request.contextPath}/registration"><button class="btn-medium">Je n'ai pas encore de compte</button></a>
+                </div>
+            </div>
+       	</div>
+	</header>
         <section id="content" class="gray-area">
             <div class="container">
                 <div id="main">

@@ -19,4 +19,16 @@ public class ChercheurOffreController
 	{
 		return "chercheur/details";
 	}
+
+	@RequestMapping(value = "/mes_cvs", method = RequestMethod.GET)
+	public String mesCV(Model model)
+	{
+		return "chercheur/mesCVs";
+	}
+
+	@RequestMapping(value = "/mes_demandes", method = RequestMethod.GET)
+	public String mesDemandes(Model model)
+	{
+		return "chercheur/mes_offres";
+	}
 }

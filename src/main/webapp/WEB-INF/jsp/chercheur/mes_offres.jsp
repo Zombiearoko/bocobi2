@@ -2,7 +2,7 @@
 	        <div class="page-title-container style6" style="background-color: #337ab7;">
             <div class="container">
                 <div class="page-title">
-                    <h2 class="entry-title" style="color: yellow;">Liste des offres trouvées</h2>
+                    <h2 class="entry-title" style="color: yellow;">Votre liste de demande d'emploi</h2>
                 </div>
                 <ul class="breadcrumbs"><!-- 
                     <li><a href="#">Toutes categories</a></li>
@@ -26,7 +26,7 @@
                 <div id="main">
                     <div class="row">
                         <div class="col-sm-4 col-md-3">
-                            <h4 class="search-results-title"><i class="soap-icon-search"></i><b>1004</b> resultats trouvés.</h4>
+                            <h4 class="search-results-title"><i class="soap-icon-search"></i><b>4</b> resultats trouvés.</h4>
                             <div class="toggle-container filters-container">
 
                                 <div class="panel style1 arrow-right">

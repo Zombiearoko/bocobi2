@@ -18,6 +18,7 @@
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     
     <!-- Theme Styles -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
@@ -37,6 +38,8 @@
     
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css">
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dataTables.bootstrap.min.css">
     
     <!-- CSS for IE -->
     <!--[if lte IE 9]>
@@ -58,7 +61,7 @@
         <div class="main-header">
     
             <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
-                Mobile Menu Toggle
+                 Mobile Menu Toggle
             </a>
     
             <div class="container">
@@ -74,17 +77,23 @@
                             <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Mes offres</a>
+                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Mes CVs</a>
+                            <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
                         </li>
                         <li class="menu-item-has-children">
                             <a href="#">Mon compte</a>
                         </li>
-                        <li class="menu-item-has-children">
+                        <!-- <li class="menu-item-has-children">
                             <a href="#">Nous contacter</a>
-                        </li>
+                        </li> -->
                         <li class="menu-item-has-children">
                             <a href="${pageContext.request.contextPath}/deconnection">Deconnexion</a>
                         </li>
@@ -93,7 +102,31 @@
             </div>
     
             <nav id="mobile-menu-01" class="mobile-menu collapse">
-    
-    
+	   			<ul class="menu">
+               		<li class="menu-item-has-children">
+                       <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
+                   </li>
+                   <li class="menu-item-has-children">
+                       <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
+                   </li>
+                   <li class="menu-item-has-children">
+                       <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
+                   </li>
+                   <li class="menu-item-has-children">
+                       <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
+                   </li>
+                   <li class="menu-item-has-children">
+                       <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
+                   </li>
+                   <li class="menu-item-has-children">
+                       <a href="#">Mon compte</a>
+                   </li>
+                   <!-- <li class="menu-item-has-children">
+                       <a href="#">Nous contacter</a>
+                   </li> -->
+                   <li class="menu-item-has-children">
+                       <a href="${pageContext.request.contextPath}/deconnection">Deconnexion</a>
+                   </li>
+               </ul>
             </nav>
         </div>
