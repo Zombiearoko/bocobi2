@@ -20,7 +20,7 @@ public  class CV  {
 	private String competences;
 	private String experienceProfessionel;
 	private String reference;
-	chercheurEmploi soumettre;
+	ChercheurEmploi soumettre;
 	ProfilRecherche correspondre[];
 	
 

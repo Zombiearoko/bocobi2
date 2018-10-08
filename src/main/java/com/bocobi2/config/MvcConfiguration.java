@@ -16,14 +16,17 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.bocobi2.dao.ArticleDAO;
-import com.bocobi2.dao.ArticleDAOImpl;
-import com.bocobi2.model.Article;
+import com.bocobi2.dao.ChercheurEmploiDAO;
+import com.bocobi2.dao.ChercheurEmploiDAOImpl;
+import com.bocobi2.dao.InternauteDAO;
+import com.bocobi2.dao.InternauteDAOImpl;
+import com.bocobi2.dao.OffreurEmploiDAO;
+import com.bocobi2.dao.OffreurEmploiDAOImpl;
+
 
 @PropertySource(value={"classpath:application.properties"})
 @Configuration
-@ComponentScan(basePackages="com.doctoriales.mi")
-@EnableWebMvc
+@ComponentScan(basePackages="com.bocobi2")
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
 	@Autowired
@@ -34,6 +37,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/jsp/");
 		resolver.setSuffix(".jsp");
+		resolver.setOrder(2);
 		return resolver;
 	}
 	@Bean(name = "multipartResolver")
@@ -58,9 +62,21 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		return dataSource;
 	}
 	
+	@Bean
+	public InternauteDAO getInternauteDAO(){
+		return new InternauteDAOImpl(getDataSource());
+	}
 	
 	@Bean
-	public ArticleDAO getArticleDao(){
-		return new ArticleDAOImpl(getDataSource());
+	public ChercheurEmploiDAO getChercheurEmploiDAO(){
+		return new ChercheurEmploiDAOImpl(getDataSource());
 	}
+	
+	@Bean
+	public OffreurEmploiDAO getOffreurEmploiDAO(){
+		return new OffreurEmploiDAOImpl(getDataSource());
+	}
+	
+	
+
 }

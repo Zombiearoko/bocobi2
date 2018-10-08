@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
+    <link rel="stylesheet" href="resources/css/animate.min.css">
     
     <!-- Current Page Styles -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/components/jquery.bxslider/jquery.bxslider.css" media="screen" />

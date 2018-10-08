@@ -12,7 +12,7 @@ import java.util.*;
 
 
 
-public  class chercheurEmploi  extends Internaute { 
+public  class ChercheurEmploi  extends Internaute { 
 	private Integer idChercheurEmploi;
 	private String nom;
 	private String prenom;

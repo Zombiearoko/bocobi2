@@ -5,7 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.bocobi2.dao.ArticleDAO;
+
+import com.bocobi2.dao.InternauteDAO;
 
 /**
  * This controller routes accesses to the application to the appropriate hanlder
@@ -18,7 +19,7 @@ import com.bocobi2.dao.ArticleDAO;
 public class HomeController{
 
 	@Autowired
-	private ArticleDAO articleDAO;
+	InternauteDAO internauteDAO;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model)
