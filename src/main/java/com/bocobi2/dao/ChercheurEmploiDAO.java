@@ -1,5 +1,7 @@
 package com.bocobi2.dao;
 
-public interface ChercheurEmploiDAO {
+import com.bocobi2.model.ChercheurEmploi;
 
+public interface ChercheurEmploiDAO {
+	public ChercheurEmploi findByLogin(String login);
 }

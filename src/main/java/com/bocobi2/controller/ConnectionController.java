@@ -23,6 +23,12 @@ public class ConnectionController
 		return "connection";
 	}
 
+	@RequestMapping(value = "/deconnection", method = RequestMethod.GET)
+	public String logout(Model model)
+	{
+		return "connection";
+	}
+
 	@RequestMapping(value = "/connection", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest req, @RequestParam("login") String login,
 			@RequestParam("motdepasse") String motdepasse)
@@ -32,7 +38,7 @@ public class ConnectionController
 			return "registration";
 		} else
 		{
-			req.setAttribute("error", "error");
+			req.setAttribute("error", "errordf");
 			req.setAttribute("oldLogin", login);
 			return "connection";
 		}

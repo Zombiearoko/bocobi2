@@ -14,7 +14,7 @@ public class InternauteDAOImpl implements InternauteDAO {
 	}
 
 	@Override
-	public Internaute findByName(String login) {
+	public Internaute findByLogin(String login) {
 		// TODO Auto-generated method stub
 		return null;
 	}

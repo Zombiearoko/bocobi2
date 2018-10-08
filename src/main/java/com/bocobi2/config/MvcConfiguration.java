@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -22,6 +23,7 @@ import com.bocobi2.dao.InternauteDAO;
 import com.bocobi2.dao.InternauteDAOImpl;
 import com.bocobi2.dao.OffreurEmploiDAO;
 import com.bocobi2.dao.OffreurEmploiDAOImpl;
+import com.bocobi2.model.UserDetailsServices;
 
 
 @PropertySource(value={"classpath:application.properties"})
@@ -77,6 +79,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		return new OffreurEmploiDAOImpl(getDataSource());
 	}
 	
+//	@Bean
+//	public UserDetailsService getUserDetailsServices(){
+//		return new UserDetailsServices();
+//	}
 	
 
 }

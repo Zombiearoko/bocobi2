@@ -16,7 +16,8 @@ import com.bocobi2.dao.InternauteDAO;
  *
  */
 @Controller
-public class HomeController{
+public class HomeController
+{
 
 	@Autowired
 	InternauteDAO internauteDAO;

@@ -45,7 +45,7 @@ public class AuthSuccess implements AuthenticationSuccessHandler{
         Authentication currentAuth = SecurityContextHolder.getContext().getAuthentication();
         String login = currentAuth.getName();
         
-        Internaute internaute=internauteDAO.findByName(login);
+        Internaute internaute=internauteDAO.findByLogin(login);
         
         request.getSession().setAttribute("user", internaute);
         
