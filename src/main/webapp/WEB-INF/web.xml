@@ -27,7 +27,7 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>com.bocobi2</param-value>
+			<param-value>com.bocobi2.config.MvcConfiguration</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

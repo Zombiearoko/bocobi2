@@ -7,152 +7,232 @@
 **************************************************************************/
 package com.bocobi2.model;
 
+import java.util.Set;
 
-import java.util.*;
-
-
-
-public  class ChercheurEmploi  extends Internaute { 
+public class ChercheurEmploi extends Internaute
+{
 	public ChercheurEmploi(Integer idUtilisateur, String role, String login, String password, String telephone,
-			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles) {
+			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles)
+	{
 		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles);
 		// TODO Auto-generated constructor stub
 	}
-	private Integer idChercheurEmploi;
-	private String nom;
-	private String prenom;
-	private String sexe;
-	private String statutMarital;
-	private String natureContrat;
-	private String niveauEtude;
-	private String Anciennete;
-	private String DureeContratSouhaite;
-	CV soumettre[];
+
+	public ChercheurEmploi(String nom, String prenom, String sexe, String statutMarital, String natureContrat,
+			String niveauEtude, String anciennete, String dureeSouhaitee, String role, String login, String password,
+			String telephone, String email)
+	{
+		super(role, login, password, telephone, email);
+		this.nom = nom;
+		this.prenom = prenom;
+		this.sexe = sexe;
+		this.statutMarital = statutMarital;
+		this.natureContrat = natureContrat;
+		this.niveauEtude = niveauEtude;
+		this.Anciennete = anciennete;
+		this.DureeContratSouhaite = dureeSouhaitee;
+		this.setRole(role);
+		this.setLogin(login);
+		this.setPassword(password);
+		this.setTelephone(telephone);
+		this.setEmail(email);
+	}
+
+	private Integer	idChercheurEmploi;
+	private String	nom;
+	private String	prenom;
+	private String	sexe;
+	private String	statutMarital;
+	private String	role;
+	private String	natureContrat;
+	private String	niveauEtude;
+	private String	Anciennete;
+	private String	DureeContratSouhaite;
+	CV				soumettre[];
+
 	/**
 	 * @return the idChercheurEmploi
 	 */
-	public Integer getIdChercheurEmploi() {
+	public Integer getIdChercheurEmploi()
+	{
 		return idChercheurEmploi;
 	}
+
+	public String getRole()
+	{
+		return role;
+	}
+
+	public void setRole(String role)
+	{
+		this.role = role;
+	}
+
 	/**
-	 * @param idChercheurEmploi the idChercheurEmploi to set
+	 * @param idChercheurEmploi
+	 *            the idChercheurEmploi to set
 	 */
-	public void setIdChercheurEmploi(Integer idChercheurEmploi) {
+	public void setIdChercheurEmploi(Integer idChercheurEmploi)
+	{
 		this.idChercheurEmploi = idChercheurEmploi;
 	}
+
 	/**
 	 * @return the nom
 	 */
-	public String getNom() {
+	public String getNom()
+	{
 		return nom;
 	}
+
 	/**
-	 * @param nom the nom to set
+	 * @param nom
+	 *            the nom to set
 	 */
-	public void setNom(String nom) {
+	public void setNom(String nom)
+	{
 		this.nom = nom;
 	}
+
 	/**
 	 * @return the prenom
 	 */
-	public String getPrenom() {
+	public String getPrenom()
+	{
 		return prenom;
 	}
+
 	/**
-	 * @param prenom the prenom to set
+	 * @param prenom
+	 *            the prenom to set
 	 */
-	public void setPrenom(String prenom) {
+	public void setPrenom(String prenom)
+	{
 		this.prenom = prenom;
 	}
+
 	/**
 	 * @return the sexe
 	 */
-	public String getSexe() {
+	public String getSexe()
+	{
 		return sexe;
 	}
+
 	/**
-	 * @param sexe the sexe to set
+	 * @param sexe
+	 *            the sexe to set
 	 */
-	public void setSexe(String sexe) {
+	public void setSexe(String sexe)
+	{
 		this.sexe = sexe;
 	}
+
 	/**
 	 * @return the statutMarital
 	 */
-	public String getStatutMarital() {
+	public String getStatutMarital()
+	{
 		return statutMarital;
 	}
+
 	/**
-	 * @param statutMarital the statutMarital to set
+	 * @param statutMarital
+	 *            the statutMarital to set
 	 */
-	public void setStatutMarital(String statutMarital) {
+	public void setStatutMarital(String statutMarital)
+	{
 		this.statutMarital = statutMarital;
 	}
+
 	/**
 	 * @return the natureContrat
 	 */
-	public String getNatureContrat() {
+	public String getNatureContrat()
+	{
 		return natureContrat;
 	}
+
 	/**
-	 * @param natureContrat the natureContrat to set
+	 * @param natureContrat
+	 *            the natureContrat to set
 	 */
-	public void setNatureContrat(String natureContrat) {
+	public void setNatureContrat(String natureContrat)
+	{
 		this.natureContrat = natureContrat;
 	}
+
 	/**
 	 * @return the niveauEtude
 	 */
-	public String getNiveauEtude() {
+	public String getNiveauEtude()
+	{
 		return niveauEtude;
 	}
+
 	/**
-	 * @param niveauEtude the niveauEtude to set
+	 * @param niveauEtude
+	 *            the niveauEtude to set
 	 */
-	public void setNiveauEtude(String niveauEtude) {
+	public void setNiveauEtude(String niveauEtude)
+	{
 		this.niveauEtude = niveauEtude;
 	}
+
 	/**
 	 * @return the anciennete
 	 */
-	public String getAnciennete() {
+	public String getAnciennete()
+	{
 		return Anciennete;
 	}
+
 	/**
-	 * @param anciennete the anciennete to set
+	 * @param anciennete
+	 *            the anciennete to set
 	 */
-	public void setAnciennete(String anciennete) {
+	public void setAnciennete(String anciennete)
+	{
 		Anciennete = anciennete;
 	}
+
 	/**
 	 * @return the dureeContratSouhaite
 	 */
-	public String getDureeContratSouhaite() {
+	public String getDureeContratSouhaite()
+	{
 		return DureeContratSouhaite;
 	}
+
 	/**
-	 * @param dureeContratSouhaite the dureeContratSouhaite to set
+	 * @param dureeContratSouhaite
+	 *            the dureeContratSouhaite to set
 	 */
-	public void setDureeContratSouhaite(String dureeContratSouhaite) {
+	public void setDureeContratSouhaite(String dureeContratSouhaite)
+	{
 		DureeContratSouhaite = dureeContratSouhaite;
 	}
+
 	/**
 	 * @return the soumettre
 	 */
-	public CV[] getSoumettre() {
+	public CV[] getSoumettre()
+	{
 		return soumettre;
 	}
+
 	/**
-	 * @param soumettre the soumettre to set
+	 * @param soumettre
+	 *            the soumettre to set
 	 */
-	public void setSoumettre(CV[] soumettre) {
+	public void setSoumettre(CV[] soumettre)
+	{
 		this.soumettre = soumettre;
 	}
-	public ChercheurEmploi() {
+
+	public ChercheurEmploi()
+	{
 		super();
 	}
-	
-	
-} //End Class chercheurEmploi
 
-
+} // End Class chercheurEmploi

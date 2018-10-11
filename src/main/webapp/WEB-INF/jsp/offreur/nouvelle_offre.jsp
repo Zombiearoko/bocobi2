@@ -1,4 +1,5 @@
  		<jsp:include page="../../partials/header.jsp"></jsp:include>
+ 		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	        <div class="page-title-container style6" style="background-color: #337ab7;">
             <div class="container">
                 <div class="page-title">
@@ -20,25 +21,25 @@
                             <h1>Publier une nouvelle offre d'emploi</h1>
                             <hr />
                             
-                           <form class="booking-form" method="post" action="">
+                           <form class="booking-form" method="post" action="${pageContext.request.contextPath}/poster_une_offre"  enctype="multipart/form-data">
                              <div class="person-information">
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
                                          <label>Nom de l'emploi <span color: red;> *</span></label>
-                                         <input type="text" required name="NOMEMPLOI" class="input-text full-width" value="" placeholder="" />
+                                         <input type="text" required name="name" class="input-text full-width" value="" placeholder="" />
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
                                          <label>Lieux <span color: red;> *</span></label>
-                                         <input type="text" required name="LIEUXEMPLOI" class="input-text full-width" value="" placeholder="" />
+                                         <input type="text" required name="location" class="input-text full-width" value="" placeholder="" />
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
                                          <label>Type d'emploi <span color: red;> *</span></label>
                                          <div class="selector">
-                                             <select required name="TYPEEMPLOI" class="full-width">
+                                             <select required name="type" class="full-width">
                                                  <option value=""></option>
                                                  <option value="CDD">CDD</option>
                                                  <option value="CDI">CDI</option>
@@ -50,14 +51,27 @@
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
+                                         <label>Profil rechercher <span color: red;> *</span></label>
+                                         <div class="selector">
+                                             <select required name="profile" class="full-width">
+                                             	<option value=""></option>
+                                             	<c:forEach var="profile" items="${ profiles }">
+                                                	<option value="<c:out value="${ profile['idProfilRecherche'] }" />"><c:out value="${ profile['competence'] }" /></option>
+                                                 </c:forEach>
+                                             </select>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <div class="col-sm-12 col-md-12">
                                          <label>Salaire <span color: red;> *</span></label>
-                                         <input type="number" required name="LIEUXEMPLOI" class="input-text full-width" value="" placeholder="" />
+                                         <input type="number" required name="salary" class="input-text full-width" value="" placeholder="" />
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
                                          <label>Logo de l'entreprise  <span color: red;> *</span></label>
-                                         <input  type="file" name="LOGOENTREPRISE" id="file" style="visibility:hidden; height:0" onChange="change()">
+                                         <input  type="file" name="file" id="file" style="visibility:hidden; height:0" onChange="change()">
 		                                <div class="input-group input-file" name="Fichier_1">
 		                                    <span class="input-group-btn">
 		                                        <button class="btn btn-default btn-choose" id="choose" type="button" onClick="select();">Choisir</button>
@@ -72,7 +86,7 @@
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
                                          <label>Description <span color: red;> *</span></label>
-									<textarea rows="10" cols="" style="width: 100%;" name="DESCRIPTIONEMPLOI"></textarea>
+									<textarea rows="10" cols="" style="width: 100%;" name="description"></textarea>
                                      </div>
                                  </div>
                                  <div class="form-group row">

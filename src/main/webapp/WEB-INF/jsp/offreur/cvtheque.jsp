@@ -1,4 +1,5 @@
  		<jsp:include page="../../partials/header.jsp"></jsp:include>
+ 		 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	        <div class="page-title-container style6" style="background-color: #337ab7;">
             <div class="container">
                 <div class="page-title">
@@ -27,33 +28,30 @@
 										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 208px;">Formation</th>
 										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 94px;">Competence</th>
 										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 40px;">Experience</th>
-										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 85px;">Residence</th>
 										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 85px;">Date</th>
 										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 72px;">Consulter</th></tr>
 									</thead>
 									<tbody>
-										<tr role="row" class="odd">
-											<td>162,700</td>
-											<td class="sorting_1">Airi Satou</td>
-											<td>Web master</td>
-											<td>Tokyo</td>
-											<td>33</td>
-											<td>2008/11/28</td>
-											<td>                                                
-											<button class="btn-medium uppercase full-width">Consulter</button>
-											</td>
-										</tr>
-										<tr role="row" class="even">
-											<td>700</td>
-											<td class="sorting_1">Angelica Ramos</td>
-											<td>Web master</td>
-											<td>London</td>
-											<td>47</td>
-											<td>2009/10/09</td>
-											<td>                                                
-											<button class="btn-medium uppercase full-width">Consulter</button>
-											</td>
-										</tr>
+										<c:if test="${ CVs.size() gt 0 }">
+											<c:forEach var="CV" items="${ CVs }">
+												<tr role="row" class="odd">
+													<td><c:out value="${ CV['formation'] }" /></td>
+													<td class="sorting_1"><c:out value="${ CV['competences'] }" /></td>
+													<td><c:out value="${ CV['experienceProfessionel'] }" /></td>
+													<td><c:out value="${ CV['dateSoumission'] }" /></td>
+													<td>                                                
+													<button class="btn-medium uppercase full-width">Consulter</button>
+													</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+										<c:if test="${ CVs.size() le 0 }">
+											<tr>
+												<td colspan="6">
+													Aucun CV n'est disponible dans la CVthèque.
+												</td>
+											</tr>
+										</c:if>
 									</tbody>
 								</table>
 							</div>

@@ -7,26 +7,24 @@
 **************************************************************************/
 package com.bocobi2.model;
 
+import java.util.Set;
 
-import java.util.*;
+public class Internaute
+{
+	private Integer		idUtilisateur;
+	private String		role;
+	private String		login;
+	private String		password;
+	private String		telephone;
+	private String		email;
+	SuiviUtilisateur	detenir[];
+	Historique			effectuer[];
 
+	private Set<Role>	roles;
 
-
-
-public  class Internaute { 
-	private Integer idUtilisateur;
-	private String role;
-	private String login;
-	private String password;
-	private String telephone;
-	private String email;
-	SuiviUtilisateur detenir[];
-	Historique effectuer[];
-	
-	private Set<Role> roles;
-
-	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone,
-			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles) {
+	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email,
+			SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles)
+	{
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.role = role;
@@ -38,8 +36,9 @@ public  class Internaute {
 		this.effectuer = effectuer;
 		this.roles = roles;
 	}
-	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone,
-			String email) {
+
+	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email)
+	{
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.role = role;
@@ -51,148 +50,179 @@ public  class Internaute {
 		this.effectuer = effectuer;
 		this.roles = roles;
 	}
-	public Internaute() {
+
+	public Internaute(String role, String login, String password, String telephone, String email)
+	{
+		super();
+		this.idUtilisateur = idUtilisateur;
+		this.role = role;
+		this.login = login;
+		this.password = password;
+		this.telephone = telephone;
+		this.email = email;
+		this.detenir = detenir;
+		this.effectuer = effectuer;
+		this.roles = roles;
+	}
+
+	public Internaute()
+	{
 		super();
 	}
+
 	/**
 	 * @return the idUtilisateur
 	 */
-	public Integer getIdUtilisateur() {
+	public Integer getIdUtilisateur()
+	{
 		return idUtilisateur;
 	}
 
 	/**
-	 * @param idUtilisateur the idUtilisateur to set
+	 * @param idUtilisateur
+	 *            the idUtilisateur to set
 	 */
-	public void setIdUtilisateur(Integer idUtilisateur) {
+	public void setIdUtilisateur(Integer idUtilisateur)
+	{
 		this.idUtilisateur = idUtilisateur;
 	}
 
 	/**
 	 * @return the role
 	 */
-	public String getRole() {
+	public String getRole()
+	{
 		return role;
 	}
 
 	/**
-	 * @param role the role to set
+	 * @param role
+	 *            the role to set
 	 */
-	public void setRole(String role) {
+	public void setRole(String role)
+	{
 		this.role = role;
 	}
 
 	/**
 	 * @return the login
 	 */
-	public String getLogin() {
+	public String getLogin()
+	{
 		return login;
 	}
 
 	/**
-	 * @param login the login to set
+	 * @param login
+	 *            the login to set
 	 */
-	public void setLogin(String login) {
+	public void setLogin(String login)
+	{
 		this.login = login;
 	}
 
 	/**
 	 * @return the password
 	 */
-	public String getPassword() {
+	public String getPassword()
+	{
 		return password;
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
-	public void setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
 
 	/**
 	 * @return the telephone
 	 */
-	public String getTelephone() {
+	public String getTelephone()
+	{
 		return telephone;
 	}
 
 	/**
-	 * @param telephone the telephone to set
+	 * @param telephone
+	 *            the telephone to set
 	 */
-	public void setTelephone(String telephone) {
+	public void setTelephone(String telephone)
+	{
 		this.telephone = telephone;
 	}
 
 	/**
 	 * @return the email
 	 */
-	public String getEmail() {
+	public String getEmail()
+	{
 		return email;
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
-	public void setEmail(String email) {
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
 
 	/**
 	 * @return the detenir
 	 */
-	public SuiviUtilisateur[] getDetenir() {
+	public SuiviUtilisateur[] getDetenir()
+	{
 		return detenir;
 	}
 
 	/**
-	 * @param detenir the detenir to set
+	 * @param detenir
+	 *            the detenir to set
 	 */
-	public void setDetenir(SuiviUtilisateur[] detenir) {
+	public void setDetenir(SuiviUtilisateur[] detenir)
+	{
 		this.detenir = detenir;
 	}
 
 	/**
 	 * @return the effectuer
 	 */
-	public Historique[] getEffectuer() {
+	public Historique[] getEffectuer()
+	{
 		return effectuer;
 	}
 
 	/**
-	 * @param effectuer the effectuer to set
+	 * @param effectuer
+	 *            the effectuer to set
 	 */
-	public void setEffectuer(Historique[] effectuer) {
+	public void setEffectuer(Historique[] effectuer)
+	{
 		this.effectuer = effectuer;
 	}
 
 	/**
 	 * @return the roles
 	 */
-	public Set<Role> getRoles() {
+	public Set<Role> getRoles()
+	{
 		return roles;
 	}
 
 	/**
-	 * @param roles the roles to set
+	 * @param roles
+	 *            the roles to set
 	 */
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<Role> roles)
+	{
 		this.roles = roles;
 	}
-	
-	 
-	
-	
-	
-	
 
-	
-	//Operations
-		
-		
-	
-	
+	// Operations
 
-} //End Class Internaute
-
-
+} // End Class Internaute
