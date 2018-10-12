@@ -7,24 +7,33 @@
 **************************************************************************/
 package com.bocobi2.model;
 
-import java.util.Date;
-
 public class OffreEmploi
 {
-	private Integer	idOffreEmploi;
-	private Integer	idProfildeRecherche;
-	private Integer	idOffreurEmploi;
-	private String	nomEmploi;
-	private String	lieuxEmploi;
-	private String	descriptionEmploi;
-	private String	typeEmploi;
-	private Integer	salaireEmploi;
-	private Date	datePublication;
-	private Date	heurePublication;
-	private String	logoEntreprise;
+	private Integer			idOffreEmploi;
+	private Integer			idProfildeRecherche;
+	private Integer			idOffreurEmploi;
+	private String			nomEmploi;
+	private String			lieuxEmploi;
+	private String			descriptionEmploi;
+	private String			typeEmploi;
+	private Integer			salaireEmploi;
+	private String			datePublication;
+	private String			heurePublication;
+	private String			logoEntreprise;
+	private OffreurEmploi	offreurEmploi;
+
+	public OffreurEmploi getOffreurEmploi()
+	{
+		return offreurEmploi;
+	}
+
+	public void setOffreurEmploi(OffreurEmploi offreurEmploi)
+	{
+		this.offreurEmploi = offreurEmploi;
+	}
 
 	public OffreEmploi(Integer idOffreEmploi, String nomEmploi, String lieuxEmploi, String descriptionEmploi,
-			String typeEmploi, Date datePublication, Date heurePublication, Integer salaireEmploi,
+			String typeEmploi, String datePublication, String heurePublication, Integer salaireEmploi,
 			String logoEntreprise, Integer idProfildeRecherche, Integer idOffreurEmploi)
 	{
 		super();
@@ -41,9 +50,8 @@ public class OffreEmploi
 		this.idOffreurEmploi = idOffreurEmploi;
 	}
 
-	public OffreEmploi(Integer idOffreEmploi, String nomEmploi, String lieuxEmploi, String descriptionEmploi,
-			String typeEmploi, Integer salaireEmploi, String logoEntreprise, Integer idProfildeRecherche,
-			Integer idOffreurEmploi)
+	public OffreEmploi(String nomEmploi, String lieuxEmploi, String descriptionEmploi, String typeEmploi,
+			Integer salaireEmploi, String logoEntreprise, Integer idProfildeRecherche, Integer idOffreurEmploi)
 	{
 		super();
 		this.idOffreEmploi = idOffreEmploi;
@@ -142,22 +150,22 @@ public class OffreEmploi
 		this.typeEmploi = typeEmploi;
 	}
 
-	public Date getDatePublication()
+	public String getDatePublication()
 	{
 		return datePublication;
 	}
 
-	public void setDatePublication(Date datePublication)
+	public void setDatePublication(String datePublication)
 	{
 		this.datePublication = datePublication;
 	}
 
-	public Date getHeurePublication()
+	public String getHeurePublication()
 	{
 		return heurePublication;
 	}
 
-	public void setHeurePublication(Date heurePublication)
+	public void setHeurePublication(String heurePublication)
 	{
 		this.heurePublication = heurePublication;
 	}

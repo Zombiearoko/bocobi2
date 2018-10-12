@@ -16,7 +16,7 @@ public class InternauteDAOImpl implements InternauteDAO
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@SuppressWarnings("finally")
+	@SuppressWarnings({ "finally", "rawtypes" })
 	@Override
 	public Internaute findByLogin(String login)
 	{
@@ -40,6 +40,7 @@ public class InternauteDAOImpl implements InternauteDAO
 					internaute.setTelephone((String) row.get("TELEPHONE"));
 					internaute.setEmail((String) row.get("EMAIL"));
 					internaute.setIdUtilisateur((Integer) row.get("IDUTILISATEUR"));
+					break;
 				}
 			}
 

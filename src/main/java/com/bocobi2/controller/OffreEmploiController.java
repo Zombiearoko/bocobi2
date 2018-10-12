@@ -49,11 +49,20 @@ public class OffreEmploiController
 	}
 
 	@RequestMapping(value = "/poster_une_offre", method = RequestMethod.POST)
-	public String registration(Model model, @RequestParam("name") String name,
+	public String registration(Model model, HttpServletRequest req, @RequestParam("name") String name,
 			@RequestParam("location") String location, @RequestParam("type") String type,
 			@RequestParam("salary") Integer salary, @RequestParam("file") MultipartFile file,
 			@RequestParam("description") String description, @RequestParam("profile") Integer profile)
 	{
+		profiles = profilDeRechercheDAO.list();
+
+		req.setAttribute("profiles", profiles);
+		// String relativeWebPath = "/resources/images/logoOffre";
+		// String absoluteDiskPath =
+		// req.getServletContext().getRealPath(relativeWebPath);
+
+		// ClassLoader classLoader = getClass().getClassLoader();
+
 		try
 		{
 			byte[] bytes = file.getBytes();
@@ -63,22 +72,39 @@ public class OffreEmploiController
 			// File dir = new File(rootPath + File.separator + "tmpFiles");
 			// if (!dir.exists())
 			// dir.mkdirs();
+			// ClassLoader classLoader = getClass().getClassLoader();
 
 			// Create the file on server
-			File serverFile = new File("/home/BOCOBI2/src/main/webapp/WEB-INF/logoOffre/" + file.getName());
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-			stream.write(bytes);
-			stream.close();
+			String fileName = file.getOriginalFilename();
+			System.out.println("========================================" + fileName);
 
-			logger.info("Server File Location=" + serverFile.getAbsolutePath());
+			if (!fileName.isEmpty() && !fileName.equals("") && fileName != null)
+			{
+				File serverFile = new File(
+						"/home/descartes/BOCOBI2/src/main/webapp/resources/images/logoOffre/" + fileName);
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+				logger.info("Server File Location=" + serverFile.getAbsolutePath());
+
+			} else
+			{
+				fileName = "shema1.jpg";
+			}
+
+			OffreEmploi offreEmploi = new OffreEmploi(name, location, description, type, salary, fileName, profile,
+					(Integer) 1);
+			offreEmploiDAO.save(offreEmploi);
+
+			return "offreur/nouvelle_offre";
+
 		} catch (Exception e)
 		{
-			e.getMessage();
+			e.printStackTrace();
+			req.setAttribute("error", "error");
+			return "offreur/nouvelle_offre";
 		}
 
-		OffreEmploi offreEmploi = new OffreEmploi((Integer) 1, name, location, description, type, salary,
-				file.getName(), profile, (Integer) 1);
-		offreEmploiDAO.save(offreEmploi);
-		return "offreur/nouvelle_offre";
 	}
 }

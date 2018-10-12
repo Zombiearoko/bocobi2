@@ -33,6 +33,11 @@ public class OffreurEmploi extends Internaute
 		this.setEmail(email);
 	}
 
+	public OffreurEmploi()
+	{
+		super();
+	}
+
 	private Integer	idOffreurEmploi;
 	private String	raisonSociale;
 	private String	situationGeographique;

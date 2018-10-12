@@ -1,4 +1,5 @@
  		<jsp:include page="../../partials/header.jsp"></jsp:include>
+ 			<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	        <div class="page-title-container style6" style="background-color: #337ab7;">
             <div class="container">
                 <div class="page-title">
@@ -25,14 +26,14 @@
                 <div class="row">
                     <div id="main" class="col-sm-8 col-md-9">
                         <div class="booking-information travelo-box">
-                            <h1>Recherche d'un developpeur laravel</h1>
+                            <h1><c:out value="${ offre['nomEmploi'] }" /></h1>
                             <hr />
                             <h2>Description</h2>
-                            <p>Praesent dolor lectus, rutrum sit amet risus vitae, imperdiet cursus neque. Nulla tempor nec lorem eu suscipit. Donec dignissim lectus a nunc molestie consectetur. Nulla eu urna in nisi adipiscing placerat. Nam vel scelerisque magna. Donec justo urna, posuere ut dictum quis.</p>
+                            <p><c:out value="${ offre['descriptionEmploi'] }" /></p>
                             <br />
                             <hr />
                             <h2>Conditions d'embauche</h2>
-                            <p>Praesent dolor lectus, rutrum sit amet risus vitae, imperdiet cursus neque. Nulla tempor nec lorem eu suscipit. Donec dignissim lectus a nunc molestie consectetur. Nulla eu urna in nisi adipiscing placerat. Nam vel scelerisque magna. Donec justo urna, posuere ut dictum quis.</p>
+                            <p></p>
                             <br />
                         </div>
                     </div>
@@ -43,22 +44,22 @@
                                 <li>
                                     <i class="soap-icon-clock circle"></i>
                                     <h5 class="title"><a href="#">Date de publication</a></h5>
-                                    <p>06-10-2018 18:48</p>
+                                    <p><c:out value="${ offre['datePublication'] }    ${ offre['heurePublication'] }" /></p>
                                 </li>
                                 <li>
                                     <i class="soap-icon-departure circle"></i>
                                     <h5 class="title"><a href="#">Localisation</a></h5>
-                                    <p>Yaounde, Cameroun</p>
+                                    <p><c:out value="${ offre['lieuxEmploi'] }" /></p>
                                 </li>
                                 <li>
                                     <i class="soap-icon-card circle"></i>
                                     <h5 class="title"><a href="#">Titre de l'offre</a></h5>
-                                    <p>Recherche d'un developpeur laravel</p>
+                                    <p><c:out value="${ offre['nomEmploi'] }" /></p>
                                 </li>
                                 <li>
                                     <i class="soap-icon-star circle"></i>
                                     <h5 class="title"><a href="#">Salaire</a></h5>
-                                    <p>75 000 mininum</p>
+                                    <p><c:out value="${ offre['salaireEmploi'] }" /></p>
                                 </li>
                             </ul>
                         </div>

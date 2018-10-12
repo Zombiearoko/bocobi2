@@ -20,13 +20,18 @@
                         <div class="booking-information travelo-box">
                             <h1>Publier une nouvelle offre d'emploi</h1>
                             <hr />
-                            
+                            <c:if test="${ not empty error }">
+						        <div class="alert alert-error center-block">
+	                               Une erreur est survenue !
+	                               <span class="close"></span>
+	                          	</div>
+						    </c:if> 
                            <form class="booking-form" method="post" action="${pageContext.request.contextPath}/poster_une_offre"  enctype="multipart/form-data">
                              <div class="person-information">
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
                                          <label>Nom de l'emploi <span color: red;> *</span></label>
-                                         <input type="text" required name="name" class="input-text full-width" value="" placeholder="" />
+                                         <input type="text" required name="category" class="input-text full-width" value="" placeholder="" />
                                      </div>
                                  </div>
                                  <div class="form-group row">
