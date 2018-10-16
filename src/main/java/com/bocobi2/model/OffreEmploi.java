@@ -20,6 +20,7 @@ public class OffreEmploi
 	private String			datePublication;
 	private String			heurePublication;
 	private String			logoEntreprise;
+	private String			categorieEmploi;
 	private OffreurEmploi	offreurEmploi;
 
 	public OffreurEmploi getOffreurEmploi()
@@ -68,6 +69,16 @@ public class OffreEmploi
 	public OffreEmploi()
 	{
 		super();
+	}
+
+	public String getCategorieEmploi()
+	{
+		return categorieEmploi;
+	}
+
+	public void setCategorieEmploi(String categorieEmploi)
+	{
+		this.categorieEmploi = categorieEmploi;
 	}
 
 	public Integer getIdOffreEmploi()

@@ -30,53 +30,75 @@
                             <h4 class="search-results-title"><i class="soap-icon-search"></i><b><c:out value="${ listeOffres.size() }" /></b> resultats trouvés.</h4>
                             <div class="toggle-container filters-container">
 
-                                <div class="panel style1 arrow-right">
-                                    <h4 class="panel-title">
-                                        <a aria-expanded="true">Catégorie</a>
-                                    </h4>
-                                    <div id="language-filter" class="panel-collapse collapse-in">
-                                        <div class="panel-content">
-                                            <form method="get" action="${pageContext.request.contextPath}/poster_une_offre">
-                                                <div class="form-group">
-                                                    <input type="text" required class="input-text full-width" />
-                                                </div>
-                                                <button type="submit" class="btn-medium uppercase full-width">Search</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                <form method="post" action="${pageContext.request.contextPath}/recherche">
+	                                <div class="panel style1 arrow-right">
+	                                    <h4 class="panel-title">
+	                                        <a aria-expanded="true">Catégorie</a>
+	                                    </h4>
+	                                    <div id="language-filter" class="panel-collapse collapse-in">
+	                                        <div class="panel-content">
+	                                                <div class="form-group">
+	                                                    <input type="text" value="${ not empty category ? category : '' }" name="categorie" class="input-text full-width" />
+	                                                </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="panel style1 arrow-right">
+	                                    <h4 class="panel-title">
+	                                        <a aria-expanded="true">Localisation</a>
+	                                    </h4>
+	                                    <div id="language-filter" class="panel-collapse collapse-in">
+	                                        <div class="panel-content">
+	                                                <div class="form-group">
+	                                                    <input type="text" value="${ not empty location ? location : '' }" name="location" class="input-text full-width" placeholder="" />
+	                                                </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="panel style1 arrow-right">
+	                                    <h4 class="panel-title">
+	                                        <a aria-expanded="true">Type</a>
+	                                    </h4>
+	                                    <div id="amenities-filter" class="panel-collapse collapse-in">
+	                                        <div class="panel-content">	                                            
+	                                            <ul>
+								                    <li class="list-group-item">
+								                        CDD
+								                        <div class="material-switch pull-right">
+								                            <input id="cdd" name="cdd" type="checkbox" ${ not empty cdd ? 'checked' : '' }/>
+								                            <label for="cdd" class="label-success"></label>
+								                        </div>
+								                    </li>
+								                    <li class="list-group-item">
+								                        CDI
+								                        <div class="material-switch pull-right">
+								                            <input id="cdi" name="cdi" type="checkbox"  ${ not empty cdi ? 'checked' : '' }/>
+								                            <label for="cdi" class="label-success"></label>
+								                        </div>
+								                    </li>
+								                    <li class="list-group-item">
+								                        Freelance
+								                        <div class="material-switch pull-right">
+								                            <input id="freelance" name="freelance" type="checkbox"  ${ not empty freelance ? 'checked' : '' }/>
+								                            <label for="freelance" class="label-success"></label>
+								                        </div>
+								                    </li>
+								                    <li class="list-group-item">
+								                        Stage
+								                        <div class="material-switch pull-right">
+								                            <input id="stage" name="stage" type="checkbox"  ${ not empty stage ? 'checked' : '' }/>
+								                            <label for="stage" class="label-success"></label>
+								                        </div>
+								                    </li>
+								                </ul>
+	                                        </div>
+	                                        
+	                                        <button type="submit" class="btn-medium uppercase full-width">Search</button>
+	                                        
+	                                    </div>
+	                                </div>
                                 
-                                <div class="panel style1 arrow-right">
-                                    <h4 class="panel-title">
-                                        <a aria-expanded="true">Type</a>
-                                    </h4>
-                                    <div id="amenities-filter" class="panel-collapse collapse-in">
-                                        <div class="panel-content">
-                                            <ul class="check-square filters-option">
-                                                <li><a href="#">CDD</a></li>
-                                                <li><a href="#">CDI</a></li>
-                                                <li><a href="#">Freelance</a></li>
-                                                <li><a href="#">Stage</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="panel style1 arrow-right">
-                                    <h4 class="panel-title">
-                                        <a aria-expanded="true">Localisation</a>
-                                    </h4>
-                                    <div id="language-filter" class="panel-collapse collapse-in">
-                                        <div class="panel-content">
-                                            <form method="post">
-                                                <div class="form-group">
-                                                    <input type="text" class="input-text full-width" placeholder="" />
-                                                </div>
-                                                <button class="btn-medium uppercase full-width">Search</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="col-sm-8 col-md-9">
