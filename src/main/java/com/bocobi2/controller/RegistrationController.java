@@ -58,7 +58,7 @@ public class RegistrationController{
 			req.setAttribute("type", 0);
 			return "registration";
 		}
-		if (j == 1){ // value 1 means that registration succeed.
+		if (j != 0){ // value 1 means that registration succeed.
 
 			req.setAttribute("registration_ok", 1);
 			return "connection";

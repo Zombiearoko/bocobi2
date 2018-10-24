@@ -24,7 +24,7 @@ public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
 	private JdbcTemplate	jdbcTemplate;
 
 	private String			sqlInternaute		= "INSERT INTO INTERNAUTE (ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?)";
-	private String			sqlChercheurEmploi	= "INSERT INTO CHERCHEUREMPLOI (IDCHERCHEUREMPLOI,IDUTILISATEUR, NOM, PRENOM, SEXE, STATUTMARITAL, NATURECONTRAT, NIVEAUETUDE, ANCIENNETE, DUREECONTRATSOUHAITE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private String			sqlChercheurEmploi	= "INSERT INTO CHERCHEUREMPLOI (IDUTILISATEUR, NOM, PRENOM, SEXE, STATUTMARITAL, NATURECONTRAT, NIVEAUETUDE, ANCIENNETE, DUREECONTRATSOUHAITE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private ChercheurEmploi	chercheur;
 
 	public ChercheurEmploiDAOImpl(DataSource dataSource){
@@ -85,7 +85,7 @@ public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
 		if(n!=-1){
 			try
 			{
-				int i = jdbcTemplate.update(sqlChercheurEmploi,1, n, chercheurEmploi.getNom(),
+				int i = jdbcTemplate.update(sqlChercheurEmploi, n, chercheurEmploi.getNom(),
 						chercheurEmploi.getPrenom(), chercheurEmploi.getSexe(), chercheurEmploi.getStatutMarital(),
 						chercheurEmploi.getNatureContrat(), chercheurEmploi.getNiveauEtude(),
 						chercheurEmploi.getAnciennete(), chercheurEmploi.getDureeContratSouhaite(),

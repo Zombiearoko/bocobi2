@@ -99,7 +99,6 @@ public class ConnectionController
 			System.out.println(internaute);
 			req.setAttribute("oldLogin", login);
 			if (internaute != null)			{
-				logger.error("My  password is {} and yours is {}. ", internaute.getPassword(),password);
 				if (password.equals(internaute.getPassword())){
 					UserDetails users = userDetailsService.loadUserByUsername(login);
 					Authentication authToken = new UsernamePasswordAuthenticationToken(users, null,
