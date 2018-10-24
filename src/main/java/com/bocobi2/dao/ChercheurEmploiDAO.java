@@ -6,7 +6,7 @@ public interface ChercheurEmploiDAO
 {
 	public ChercheurEmploi findByLogin(String login);
 
-	public int save(ChercheurEmploi chercheurEmploi) throws Exception; /*
+	public long save(ChercheurEmploi chercheurEmploi) throws Exception; /*
 																		 * 1=Insertion Success and 2=Insertion Failed
 																		 */
 }

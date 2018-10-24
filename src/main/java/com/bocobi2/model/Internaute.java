@@ -7,11 +7,12 @@
 **************************************************************************/
 package com.bocobi2.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Internaute
 {
-	private Integer		idUtilisateur;
+	private long		idUtilisateur;
 	private String		role;
 	private String		login;
 	private String		password;
@@ -20,7 +21,7 @@ public class Internaute
 	SuiviUtilisateur	detenir[];
 	Historique			effectuer[];
 
-	private Set<Role>	roles;
+	private Set<Role>	roles=new HashSet<>();
 
 	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email,
 			SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles)
@@ -73,18 +74,18 @@ public class Internaute
 	/**
 	 * @return the idUtilisateur
 	 */
-	public Integer getIdUtilisateur()
+	public long getIdUtilisateur()
 	{
 		return idUtilisateur;
 	}
 
 	/**
-	 * @param idUtilisateur
+	 * @param l
 	 *            the idUtilisateur to set
 	 */
-	public void setIdUtilisateur(Integer idUtilisateur)
+	public void setIdUtilisateur(long l)
 	{
-		this.idUtilisateur = idUtilisateur;
+		this.idUtilisateur = l;
 	}
 
 	/**
@@ -209,8 +210,11 @@ public class Internaute
 	/**
 	 * @return the roles
 	 */
-	public Set<Role> getRoles()
-	{
+	public Set<Role> getRoles()	{
+		Set<Internaute> setInternaute=new HashSet<>();
+		setInternaute.add(this);
+		Role r=new Role("CHERCHEUREMPLOI",setInternaute);
+		roles.add(r);
 		return roles;
 	}
 

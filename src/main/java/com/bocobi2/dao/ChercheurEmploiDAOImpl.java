@@ -4,78 +4,103 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Map;
+
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import com.bocobi2.model.ChercheurEmploi;
+import com.bocobi2.model.Internaute;
 
-public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO
-{
+public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
+
+	@Autowired 
+	InternauteDAO		internauteDAO;
 	private JdbcTemplate	jdbcTemplate;
 
 	private String			sqlInternaute		= "INSERT INTO INTERNAUTE (ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?)";
-	private String			sqlChercheurEmploi	= "INSERT INTO CHERCHEUREMPLOI (IDUTILISATEUR, NOM, PRENOM, SEXE, STATUTMARITAL, NATURECONTRAT, NIVEAUETUDE, ANCIENNETE, DUREECONTRATSOUHAITE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private String			sqlChercheurEmploi	= "INSERT INTO CHERCHEUREMPLOI (IDCHERCHEUREMPLOI,IDUTILISATEUR, NOM, PRENOM, SEXE, STATUTMARITAL, NATURECONTRAT, NIVEAUETUDE, ANCIENNETE, DUREECONTRATSOUHAITE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private ChercheurEmploi	chercheur;
 
-	public ChercheurEmploiDAOImpl(DataSource dataSource)
-	{
+	public ChercheurEmploiDAOImpl(DataSource dataSource){
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
 	public ChercheurEmploi findByLogin(String login)
 	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@SuppressWarnings("finally")
-	@Override
-	public int save(ChercheurEmploi chercheurEmploi) throws Exception
-	{
-		int ret = -1;
-		KeyHolder holder = new GeneratedKeyHolder();
+		chercheur=null;
 		// System.out.println("1");
-		chercheur = chercheurEmploi;
+		System.out.println("query preparing1...");
+		String sql = "SELECT * FROM CHERCHEUREMPLOI WHERE LOGIN = \"" + login + "\"";
 
-		jdbcTemplate.update(new PreparedStatementCreator()
-		{
-			@Override
-			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException
-			{
-				final PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sqlInternaute,
-						Statement.RETURN_GENERATED_KEYS);
-				ps.setString(1, chercheur.getRole());
-				ps.setString(2, chercheur.getLogin());
-				ps.setString(3, chercheur.getPassword());
-				ps.setString(4, chercheur.getTelephone());
-				ps.setString(5, chercheur.getEmail());
-				return ps;
+		try{
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+
+			if (rows.size() != 0)			{
+				chercheur = new ChercheurEmploi();
+				for (Map row : rows){
+					chercheur.setIdChercheurEmploi((int) row.get("IDCHERCHEUREMPLOI"));
+					chercheur.setDureeContratSouhaite((String) row.get("DUREECONTRATSOUHAITE"));
+					chercheur.setAnciennete((String) row.get("ANCIENNETE"));
+					chercheur.setNiveauEtude((String) row.get("NIVEAUETUDE"));
+					chercheur.setNatureContrat((String) row.get("NATURECONTRAT"));
+					chercheur.setStatutMarital((String) row.get("STATUTMARITAL"));
+					chercheur.setSexe((String) row.get("SEXE"));
+					chercheur.setPrenom((String) row.get("PRENOM"));;
+					chercheur.setNom((String) row.get("NOM"));;
+					chercheur.setAnciennete((String) row.get("ANCIENNETE"));
+					chercheur.setLogin((String) row.get("LOGIN"));
+					chercheur.setRole((String) row.get("ROLE"));
+					chercheur.setPassword((String) row.get("PASSWORD"));
+					chercheur.setTelephone((String) row.get("TELEPHONE"));
+					chercheur.setEmail((String) row.get("EMAIL"));
+					chercheur.setIdUtilisateur((long) row.get("IDUTILISATEUR"));
+					break;
+				}
 			}
-		}, holder);
 
-		Integer oldId = holder.getKey().intValue();
-		System.out.println("----------------------------------------------" + oldId);
-
-		try
-		{
-			int i = jdbcTemplate.update(sqlChercheurEmploi, oldId, chercheurEmploi.getNom(),
-					chercheurEmploi.getPrenom(), chercheurEmploi.getSexe(), chercheurEmploi.getStatutMarital(),
-					chercheurEmploi.getNatureContrat(), chercheurEmploi.getNiveauEtude(),
-					chercheurEmploi.getAnciennete(), chercheurEmploi.getDureeContratSouhaite(),
-					chercheurEmploi.getRole(), chercheurEmploi.getLogin(), chercheurEmploi.getPassword(),
-					chercheurEmploi.getTelephone(), chercheurEmploi.getEmail());
-			ret = i;
-			System.out.println("la valeur de retour est *****************" + ret);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		} finally
 		{
-			return ret;
+			return chercheur;
 		}
+	}
 
+	@SuppressWarnings("finally")
+	@Override
+	public long save(ChercheurEmploi chercheurEmploi) throws Exception{
+		long ret = -1;
+		KeyHolder holder = new GeneratedKeyHolder();
+		// System.out.println("1");
+		chercheur = chercheurEmploi;
+		long n=internauteDAO.save((Internaute)chercheurEmploi);
+		if(n!=-1){
+			try
+			{
+				int i = jdbcTemplate.update(sqlChercheurEmploi,1, n, chercheurEmploi.getNom(),
+						chercheurEmploi.getPrenom(), chercheurEmploi.getSexe(), chercheurEmploi.getStatutMarital(),
+						chercheurEmploi.getNatureContrat(), chercheurEmploi.getNiveauEtude(),
+						chercheurEmploi.getAnciennete(), chercheurEmploi.getDureeContratSouhaite(),
+						chercheurEmploi.getRole(), chercheurEmploi.getLogin(), chercheurEmploi.getPassword(),
+						chercheurEmploi.getTelephone(), chercheurEmploi.getEmail());
+				ret = this.findByLogin(chercheurEmploi.getLogin()).getIdChercheurEmploi();
+				System.out.println("la valeur de retour est *****************" + ret);
+			} catch (Exception e){
+				e.printStackTrace();
+			} finally{
+				return ret;
+			}
+		}
+		else{
+			return -2;
+		}
 	}
 }

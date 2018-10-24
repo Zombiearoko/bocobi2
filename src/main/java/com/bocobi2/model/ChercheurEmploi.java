@@ -38,7 +38,7 @@ public class ChercheurEmploi extends Internaute
 		this.setEmail(email);
 	}
 
-	private Integer	idChercheurEmploi;
+	private long	idChercheurEmploi;
 	private String	nom;
 	private String	prenom;
 	private String	sexe;
@@ -53,7 +53,7 @@ public class ChercheurEmploi extends Internaute
 	/**
 	 * @return the idChercheurEmploi
 	 */
-	public Integer getIdChercheurEmploi()
+	public long getIdChercheurEmploi()
 	{
 		return idChercheurEmploi;
 	}
@@ -69,12 +69,12 @@ public class ChercheurEmploi extends Internaute
 	}
 
 	/**
-	 * @param idChercheurEmploi
+	 * @param l
 	 *            the idChercheurEmploi to set
 	 */
-	public void setIdChercheurEmploi(Integer idChercheurEmploi)
+	public void setIdChercheurEmploi(long l)
 	{
-		this.idChercheurEmploi = idChercheurEmploi;
+		this.idChercheurEmploi = l;
 	}
 
 	/**

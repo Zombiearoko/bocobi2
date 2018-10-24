@@ -1,5 +1,7 @@
 package com.bocobi2.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,76 +72,67 @@ public class ConnectionController
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/retrieve", method = RequestMethod.GET)
+	public Object retrieve(String error, String logout, Authentication authenticationg, Principal principal,
+			HttpServletRequest request) {
+		String userDetails = SecurityContextHolder.getContext().getAuthentication().getName();
+		System.out.println("je suis en session toto " + userDetails);
+		/*
+		 * if (userDetails instanceof UserDetails) { return ((UserDetails)
+		 * userDetails).getUsername(); }
+		 */
+
+		return userDetails;
+
+}
 	@RequestMapping(value = { "/connectionChercheurEmploi" }, method = RequestMethod.POST)
-	public String login(Model model, @ModelAttribute("loginChercheurEmploi") ChercheurEmploi chercheurEmploi,
-			HttpServletRequest req)
-	{
-		System.out.println("connexion  d'un chercheur d'emploie");
-		String login = req.getParameter("login");
-		String password = req.getParameter("motdepasse");
-		System.out.println("-------------------------------");
-		System.out.println(login);
-		System.out.println("-------------------------------");
-		System.out.println("-------------------------------");
-		System.out.println(password);
-		// recherche du membre dans la base de donnees
-		try
-		{
+	public String login(Model model, @RequestParam("login") String login1,
+			@RequestParam("motdepasse")String password1,
+			HttpServletRequest req)	{
+		String login = login1;
+		String password = password1.trim();
+		try{
 			System.out.println("c'est le try");
 			Internaute internaute = new Internaute();
 			internaute = internauteDAO.findByLogin(login);
 			System.out.println(internaute);
 			req.setAttribute("oldLogin", login);
-			if (internaute != null)
-			{
-				if (password.equals(internaute.getPassword()))
-				{
-					System.out.println("deuxieme if c'est moi");
+			if (internaute != null)			{
+				logger.error("My  password is {} and yours is {}. ", internaute.getPassword(),password);
+				if (password.equals(internaute.getPassword())){
 					UserDetails users = userDetailsService.loadUserByUsername(login);
-					// System.out.println("Humm tu as reussi a me mettre en session tu es forte ma
-					// petite 11111111111" + users);
 					Authentication authToken = new UsernamePasswordAuthenticationToken(users, null,
 							users.getAuthorities());
-					// SecurityContextHolder.getContext().setAuthentication(authToken);
 					SecurityContextHolder.getContext().setAuthentication(authToken);
-					// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-					// Authentication request = new UsernamePasswordAuthenticationToken(users,
-					// users.getAuthorities());
-					// Authentication result = am.authenticate(request);
-					// SecurityContextHolder.getContext().setAuthentication(result);
 					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-					if (!(auth instanceof AnonymousAuthenticationToken))
-					{
-						System.out.println(users.getAuthorities()
-								+ " Humm tu as reussi a me mettre en session tu es forte ma petite "
-								+ SecurityContextHolder.getContext().getAuthentication().getName());
-						model.addAttribute("Administrators", "You have been login successfully."
+					if (!(auth instanceof AnonymousAuthenticationToken)){
+						logger.info("Connexion Réussie pour {}. ",
+								SecurityContextHolder.getContext().getAuthentication().getName());
+						model.addAttribute("Internaute", "You have been login successfully."
 								+ SecurityContextHolder.getContext().getAuthentication().getName());
 						req.setAttribute("succes", "You have been login successfully."
 								+ SecurityContextHolder.getContext().getAuthentication().getName());
-						return "/";
+						return "chercheur/mesCVs";
 					}
-					return "connection";
-				} else
-				{
-					logger.error("Administrator with password {} not found. ", password);
+					return "chercheur/mesCVs";
+				} else{
+					logger.error("Internaute with password {} not found. ", password);
 					model.addAttribute("errorPassword", "Password not found.");
 					req.setAttribute("errorLogin", "Password not found.");
 				}
-			} else
-			{
+			} else{
 				logger.error("User with login {} not found.", login);
-				model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
-				req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
+				model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist1");
+				req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist1");
 			}
-		} catch (Exception ex)
-		{
+		} catch (Exception ex){
 			logger.error("User with login {} not found.", login);
-			model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
-			req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
+			model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist2");
+			req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist2");
+			ex.printStackTrace();
 		}
 		System.out.println("ma petite laisse tomber c'est pas a ton niveau ma fille");
-		// return "redirect:/administratorHome";
 		return "connection";
 	}
 }
