@@ -11,15 +11,13 @@ import com.bocobi2.dao.OffreEmploiDAO;
 import com.bocobi2.model.OffreEmploi;
 
 @Controller
-public class ChercheurOffreController
-{
+public class ChercheurOffreController{
 
 	@Autowired
 	OffreEmploiDAO offreEmploiDAO;
 
 	@RequestMapping(value = "/trouver_une_offre", method = RequestMethod.GET)
-	public String index(Model model, HttpServletRequest req)
-	{
+	public String index(Model model, HttpServletRequest req){
 		List<OffreEmploi> offreEmplois = offreEmploiDAO.listeOffres();
 
 		req.setAttribute("listeOffres", offreEmplois);
@@ -33,8 +31,7 @@ public class ChercheurOffreController
 	}
 
 	@RequestMapping(value = "/recherche", method = RequestMethod.POST)
-	public String recherche(Model model, HttpServletRequest req)
-	{
+	public String recherche(Model model, HttpServletRequest req){
 		String category = req.getParameter("categorie");
 		String location = req.getParameter("location");
 		String cdd = req.getParameter("cdd");
@@ -88,8 +85,7 @@ public class ChercheurOffreController
 	 */
 
 	@RequestMapping(value = "/details_offre", method = RequestMethod.GET)
-	public String details(Model model, HttpServletRequest req)
-	{
+	public String details(Model model, HttpServletRequest req){
 		try
 		{
 			int id = Integer.valueOf(req.getParameter("id")).intValue();
@@ -108,14 +104,12 @@ public class ChercheurOffreController
 	}
 
 	@RequestMapping(value = "/mes_cvs", method = RequestMethod.GET)
-	public String mesCV(Model model)
-	{
+	public String mesCV(Model model)	{
 		return "chercheur/mesCVs";
 	}
 
 	@RequestMapping(value = "/mes_demandes", method = RequestMethod.GET)
-	public String mesDemandes(Model model)
-	{
+	public String mesDemandes(Model model){
 		return "chercheur/mes_offres";
 	}
 }

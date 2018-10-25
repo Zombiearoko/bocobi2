@@ -21,8 +21,7 @@ import com.bocobi2.model.OffreurEmploi;
  *
  */
 @Controller
-public class RegistrationController
-{
+public class RegistrationController{
 	@Autowired
 	InternauteDAO		internauteDAO;
 
@@ -45,29 +44,25 @@ public class RegistrationController
 			@RequestParam("studyLevel") String niveauEtude, @RequestParam("seniority") String anciennete,
 			@RequestParam("timeOfContact") String dureeContratSouhaitee, @RequestParam("login") String login,
 			@RequestParam("password") String password, @RequestParam("phone") String telephone,
-			@RequestParam("email") String email)
-	{
+			@RequestParam("email") String email){
 		ChercheurEmploi chercheurEmploi = new ChercheurEmploi(name, surname, sex, statutMarital, natureContrat,
-				niveauEtude, anciennete, dureeContratSouhaitee, "Chercheur Emploi", login, password, telephone, email);
-		int j;
-		try
-		{
+				niveauEtude, anciennete, dureeContratSouhaitee, "CHERCHEUREMPLOI", login, password, telephone, email,"DISCONNECTED");
+		long j;
+		try		{
 			j = chercheurEmploiDAO.save(chercheurEmploi);
 
-		} catch (Exception e)
-		{
+		} catch (Exception e)		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			req.setAttribute("error", 1);
 			req.setAttribute("type", 0);
 			return "registration";
 		}
-		if (j == 1) // value 1 means that registration succeed.
-		{
+		if (j != 0){ // value 1 means that registration succeed.
+
 			req.setAttribute("registration_ok", 1);
 			return "connection";
-		} else
-		{
+		} else	{
 			req.setAttribute("error", 1);
 			req.setAttribute("type", 0);
 			return "registration";
@@ -78,29 +73,24 @@ public class RegistrationController
 	public String registrationOffreur(Model model, HttpServletRequest req, @RequestParam("raison") String raison,
 			@RequestParam("situation_geograpique") String situation_geograpique, @RequestParam("login") String login,
 			@RequestParam("mdp") String mdp, @RequestParam("tel") String tel, @RequestParam("mail") String mail,
-			@RequestParam("addr") String addr, @RequestParam("desc") String desc)
-	{
-		OffreurEmploi offreurEmploi = new OffreurEmploi(raison, situation_geograpique, desc, addr, "Offreur Emploi",
-				login, mdp, tel, mail);
+			@RequestParam("addr") String addr, @RequestParam("desc") String desc){
+		OffreurEmploi offreurEmploi = new OffreurEmploi(raison, situation_geograpique, desc, addr, "OFFREUREMPLOI",
+				login, mdp, tel, mail,"DISCONNECTED");
 		int j;
-		try
-		{
+		try	{
 			j = offreurEmploiDAO.save(offreurEmploi);
 
-		} catch (Exception e)
-		{
+		} catch (Exception e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			req.setAttribute("error", 1);
 			req.setAttribute("type", 1);
 			return "registration";
-		}
-		if (j == 1) // value 1 means that registration succeed.
-		{
+		}		if (j == 1){ // value 1 means that registration succeed.
+
 			req.setAttribute("registration_ok", 1);
 			return "connection";
-		} else
-		{
+		} else{
 			req.setAttribute("error", 1);
 			req.setAttribute("type", 1);
 			return "registration";

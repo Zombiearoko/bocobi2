@@ -1,13 +1,20 @@
 package com.bocobi2.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+
 import com.bocobi2.model.Internaute;
 
-public class InternauteDAOImpl implements InternauteDAO
-{
+public class InternauteDAOImpl implements InternauteDAO{
+
 	private JdbcTemplate	jdbcTemplate;
 	private Internaute		internaute;
 
@@ -18,63 +25,53 @@ public class InternauteDAOImpl implements InternauteDAO
 
 	@SuppressWarnings({ "finally", "rawtypes" })
 	@Override
-	public Internaute findByLogin(String login)
-	{
+	public Internaute findByLogin(String login){
 		internaute = null;
-		// System.out.println("1");
-		System.out.println("query preparing...");
-		String sql = "SELECT * FROM INTERNAUTE WHERE LOGIN = \"" + login + "\"";
+		String sql = "SELECT * FROM INTERNAUTE WHERE LOGIN='" + login+"'";
 
-		try
-		{
-			List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-
-			if (rows.size() != 0)
-			{
-				internaute = new Internaute();
-				for (Map row : rows)
-				{
-					internaute.setLogin((String) row.get("LOGIN"));
-					internaute.setRole((String) row.get("ROLE"));
-					internaute.setPassword((String) row.get("PASSWORD"));
-					internaute.setTelephone((String) row.get("TELEPHONE"));
-					internaute.setEmail((String) row.get("EMAIL"));
-					internaute.setIdUtilisateur((Integer) row.get("IDUTILISATEUR"));
-					break;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Internaute>() {
+			
+			@Override
+			public Internaute extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
+				System.out.println("query preparing2...");
+				if (rs.next()) {
+					internaute = new Internaute();
+					internaute.setLogin((String) rs.getString("LOGIN"));
+					internaute.setRole((String) rs.getString("ROLE"));
+					internaute.setPassword((String) rs.getString("PASSWORD"));
+					internaute.setTelephone((String) rs.getString("TELEPHONE"));
+					internaute.setEmail((String) rs.getString("EMAIL"));
+					internaute.setIdUtilisateur(rs.getLong("IDUTILISATEUR") );
+					internaute.setConnectionStatus(rs.getString("CONNECTIONSTATUS"));
+					return internaute;
 				}
+				return null;
 			}
 
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			return internaute;
-		}
+		});
 	}
 
 	@SuppressWarnings("finally")
 	@Override
-	public int save(Internaute internaute)
-	{
-		int ret = -1;
+	public long save(Internaute internaute)	{
+		long ret = -1;
 		// System.out.println("1");
 		System.out.println(internaute);
-		String sql = "INSERT INTO INTERNAUTE (IDUTILISATEUR,ROLE,LOGIN, PASSWORD,"
-				+ " TELEPHONE,EMAIL) VALUES (?,?, ?, ?, ?,?)";
+		String sql = "INSERT INTO INTERNAUTE (ROLE,LOGIN, PASSWORD,"
+				+ " TELEPHONE,EMAIL,CONNECTIONSTATUS) VALUES (?, ?, ?, ?,?,?)";
 
-		try
-		{
+		try{
 			// System.out.println(article);
-			int i = jdbcTemplate.update(sql, internaute.getIdUtilisateur(), internaute.getRole(), internaute.getLogin(),
-					internaute.getPassword(), internaute.getTelephone(), internaute.getEmail());
-			ret = i;
-			System.out.println("la valeur de retour est *****************" + ret);
-		} catch (Exception e)
-		{
+			jdbcTemplate.update(sql,  internaute.getRole(), internaute.getLogin(),
+					internaute.getPassword(), internaute.getTelephone(), internaute.getEmail(),
+					internaute.getConnectionStatus());
+			ret =  findByLogin(internaute.getLogin()).getIdUtilisateur();
+			System.out.println("L'ID de l'utilisateur enregistré est *****************" + ret);
+
+		} catch (Exception e){
 			e.printStackTrace();
-		} finally
-		{
+		} finally{
 			return ret;
 		}
 
@@ -99,6 +96,29 @@ public class InternauteDAOImpl implements InternauteDAO
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public long update(Internaute internaute) {
+		long ret = -1;
+		// System.out.println("1");
+		System.out.println(internaute);
+		String sql = "UPDATE INTERNAUTE set ROLE=? ,LOGIN=?, PASSWORD=?,"
+				+ " TELEPHONE=?,EMAIL=?,CONNECTIONSTATUS=? WHERE IDUTILISATEUR=?";
+				
+		try{
+			// System.out.println(article);
+			jdbcTemplate.update(sql,  internaute.getRole(), internaute.getLogin(),
+					internaute.getPassword(), internaute.getTelephone(), internaute.getEmail(),
+					internaute.getConnectionStatus(),internaute.getIdUtilisateur());
+			ret =  findByLogin(internaute.getLogin()).getIdUtilisateur();
+			System.out.println("Internaute mis à jour avec succès le voilà : *****************" + findByLogin(internaute.getLogin()));
+
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			return ret;
+		}
 	}
 
 }

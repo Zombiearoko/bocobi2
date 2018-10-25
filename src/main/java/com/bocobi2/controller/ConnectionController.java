@@ -1,6 +1,13 @@
 package com.bocobi2.controller;
 
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -70,76 +78,90 @@ public class ConnectionController
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/retrieve", method = RequestMethod.GET)
+	public Object retrieve(String error, String logout, Authentication authenticationg, Principal principal,
+			HttpServletRequest request) {
+		String userDetails = SecurityContextHolder.getContext().getAuthentication().getName();
+		System.out.println("je suis en session toto " + userDetails);
+		/*
+		 * if (userDetails instanceof UserDetails) { return ((UserDetails)
+		 * userDetails).getUsername(); }
+		 */
+
+		return userDetails;
+
+	}
 	@RequestMapping(value = { "/connectionChercheurEmploi" }, method = RequestMethod.POST)
-	public String login(Model model, @ModelAttribute("loginChercheurEmploi") ChercheurEmploi chercheurEmploi,
-			HttpServletRequest req)
-	{
-		System.out.println("connexion  d'un chercheur d'emploie");
-		String login = req.getParameter("login");
-		String password = req.getParameter("motdepasse");
-		System.out.println("-------------------------------");
-		System.out.println(login);
-		System.out.println("-------------------------------");
-		System.out.println("-------------------------------");
-		System.out.println(password);
-		// recherche du membre dans la base de donnees
-		try
-		{
+	public String login(Model model, @RequestParam("login") String login1,
+			@RequestParam("motdepasse")String password1,
+			HttpServletRequest req)	{
+		String login = login1;
+		HttpSession session = req.getSession();
+		String password = password1.trim();
+		try{
 			System.out.println("c'est le try");
 			Internaute internaute = new Internaute();
 			internaute = internauteDAO.findByLogin(login);
 			System.out.println(internaute);
 			req.setAttribute("oldLogin", login);
-			if (internaute != null)
-			{
-				if (password.equals(internaute.getPassword()))
-				{
-					System.out.println("deuxieme if c'est moi");
+			if (internaute != null)			{
+				if (password.equals(internaute.getPassword())){
 					UserDetails users = userDetailsService.loadUserByUsername(login);
-					// System.out.println("Humm tu as reussi a me mettre en session tu es forte ma
-					// petite 11111111111" + users);
 					Authentication authToken = new UsernamePasswordAuthenticationToken(users, null,
 							users.getAuthorities());
-					// SecurityContextHolder.getContext().setAuthentication(authToken);
 					SecurityContextHolder.getContext().setAuthentication(authToken);
-					// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-					// Authentication request = new UsernamePasswordAuthenticationToken(users,
-					// users.getAuthorities());
-					// Authentication result = am.authenticate(request);
-					// SecurityContextHolder.getContext().setAuthentication(result);
 					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-					if (!(auth instanceof AnonymousAuthenticationToken))
-					{
-						System.out.println(users.getAuthorities()
-								+ " Humm tu as reussi a me mettre en session tu es forte ma petite "
-								+ SecurityContextHolder.getContext().getAuthentication().getName());
-						model.addAttribute("Administrators", "You have been login successfully."
-								+ SecurityContextHolder.getContext().getAuthentication().getName());
-						req.setAttribute("succes", "You have been login successfully."
-								+ SecurityContextHolder.getContext().getAuthentication().getName());
-						return "/";
+					if (!(auth instanceof AnonymousAuthenticationToken)){
+						ChercheurEmploi chercheur=chercheurEmploiDAO.findByLogin(login);
+						chercheur.setConnectionStatus("CONNECTED");
+						chercheurEmploiDAO.update(chercheur);
+						internauteDAO.update(chercheur);
+						logger.info("Connexion Réussie pour {}. ",
+								SecurityContextHolder.getContext().getAuthentication().getName());
+						model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
+						req.setAttribute("succes", SecurityContextHolder.getContext().getAuthentication().getName());
+						session.setAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
+						 
+						return "chercheur/mesCVs";
 					}
-					return "connection";
-				} else
-				{
-					logger.error("Administrator with password {} not found. ", password);
+					return "chercheur/mesCVs";
+				} else{
+					logger.error("Internaute with password {} not found. ", password);
 					model.addAttribute("errorPassword", "Password not found.");
 					req.setAttribute("errorLogin", "Password not found.");
 				}
-			} else
-			{
+			} else{
 				logger.error("User with login {} not found.", login);
-				model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
-				req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
+				model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist1");
+				req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist1");
 			}
-		} catch (Exception ex)
-		{
+		} catch (Exception ex){
 			logger.error("User with login {} not found.", login);
-			model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
-			req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist");
+			model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist2");
+			req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist2");
+			ex.printStackTrace();
 		}
 		System.out.println("ma petite laisse tomber c'est pas a ton niveau ma fille");
-		// return "redirect:/administratorHome";
 		return "connection";
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutMemberPost(Model model,HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String login=(String) session.getAttribute("login");
+	    logger.debug("While trying to logout {} .", login);
+		if (login != null) {
+			ChercheurEmploi chercheur=chercheurEmploiDAO.findByLogin(login);
+			chercheur.setConnectionStatus("DISCONNECTED");
+			chercheurEmploiDAO.update(chercheur);
+			internauteDAO.update(chercheur);
+			session.removeAttribute("login");
+			logger.info("Déconnexion Réussie pour {}. ",chercheur);
+			return "connection";		
+		}
+		return "index";
 	}
 }

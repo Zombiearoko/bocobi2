@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.bocobi2.dao.InternauteDAO;
 
-@Component
+//@Component
 public class UserDetailsServices implements UserDetailsService{
 	@Autowired
 	InternauteDAO internauteDAO;

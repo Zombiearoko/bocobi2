@@ -17,7 +17,7 @@
                 <div class="row">
                     <div id="main" class="col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1">
                         <div class="booking-information travelo-box">
-                            <h1>Publier une nouvelle offre d'emploi</h1>
+                            <h1>Recherche dans ma liste de CV ${user}</h1>
                             <hr />
                             <c:if test="${ not empty error }">
 						        <div class="alert alert-error center-block">

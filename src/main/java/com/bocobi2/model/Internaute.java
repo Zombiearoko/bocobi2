@@ -7,11 +7,13 @@
 **************************************************************************/
 package com.bocobi2.model;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Internaute
 {
-	private Integer		idUtilisateur;
+	private long		idUtilisateur;
 	private String		role;
 	private String		login;
 	private String		password;
@@ -19,12 +21,27 @@ public class Internaute
 	private String		email;
 	SuiviUtilisateur	detenir[];
 	Historique			effectuer[];
+	private String      connectionStatus;
 
-	private Set<Role>	roles;
+	/**
+	 * @return the connectionStatus
+	 */
+	public String getConnectionStatus() {
+		return connectionStatus;
+	}
 
-	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email,
-			SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles)
-	{
+	/**
+	 * @param connectionStatus the connectionStatus to set
+	 */
+	public void setConnectionStatus(String connectionStatus) {
+		this.connectionStatus = connectionStatus;
+	}
+
+	private Set<Role>	roles=new HashSet<>();
+
+	
+	public Internaute(long idUtilisateur, String role, String login, String password, String telephone, String email,
+			SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles, String connectionStatus) {
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.role = role;
@@ -34,10 +51,11 @@ public class Internaute
 		this.email = email;
 		this.detenir = detenir;
 		this.effectuer = effectuer;
+		this.connectionStatus = connectionStatus;
 		this.roles = roles;
 	}
 
-	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email)
+	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email, String connectionStatus)
 	{
 		super();
 		this.idUtilisateur = idUtilisateur;
@@ -48,10 +66,11 @@ public class Internaute
 		this.email = email;
 		this.detenir = detenir;
 		this.effectuer = effectuer;
+		this.connectionStatus = connectionStatus;
 		this.roles = roles;
 	}
 
-	public Internaute(String role, String login, String password, String telephone, String email)
+	public Internaute(String role, String login, String password, String telephone, String email, String connectionStatus)
 	{
 		super();
 		this.idUtilisateur = idUtilisateur;
@@ -62,6 +81,7 @@ public class Internaute
 		this.email = email;
 		this.detenir = detenir;
 		this.effectuer = effectuer;
+		this.connectionStatus = connectionStatus;
 		this.roles = roles;
 	}
 
@@ -73,18 +93,18 @@ public class Internaute
 	/**
 	 * @return the idUtilisateur
 	 */
-	public Integer getIdUtilisateur()
+	public long getIdUtilisateur()
 	{
 		return idUtilisateur;
 	}
 
 	/**
-	 * @param idUtilisateur
+	 * @param l
 	 *            the idUtilisateur to set
 	 */
-	public void setIdUtilisateur(Integer idUtilisateur)
+	public void setIdUtilisateur(long l)
 	{
-		this.idUtilisateur = idUtilisateur;
+		this.idUtilisateur = l;
 	}
 
 	/**
@@ -209,8 +229,11 @@ public class Internaute
 	/**
 	 * @return the roles
 	 */
-	public Set<Role> getRoles()
-	{
+	public Set<Role> getRoles()	{
+		Set<Internaute> setInternaute=new HashSet<>();
+		setInternaute.add(this);
+		Role r=new Role("CHERCHEUREMPLOI",setInternaute);
+		roles.add(r);
 		return roles;
 	}
 
@@ -223,6 +246,18 @@ public class Internaute
 		this.roles = roles;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Internaute [idUtilisateur=" + idUtilisateur + ", role=" + role + ", login=" + login + ", password="
+				+ password + ", telephone=" + telephone + ", email=" + email + ", detenir=" + Arrays.toString(detenir)
+				+ ", effectuer=" + Arrays.toString(effectuer) + ", connectionStatus=" + connectionStatus + ", roles="
+				+ roles + "]";
+	}
+
+	
 	// Operations
 
 } // End Class Internaute

@@ -8,9 +8,8 @@ public interface InternauteDAO
 
 	public Internaute findByLogin(String login);
 
-	public int save(Internaute internaute);/*
-											 * 1=Insertion Success and 2=Insertion Failed
-											 */
+	public long save(Internaute internaute);
+	public long update(Internaute internaute);
 
 	public void delete(int userId);
 
