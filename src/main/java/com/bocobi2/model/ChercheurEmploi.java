@@ -12,17 +12,17 @@ import java.util.Set;
 public class ChercheurEmploi extends Internaute
 {
 	public ChercheurEmploi(Integer idUtilisateur, String role, String login, String password, String telephone,
-			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles)
+			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles, String connectionStatus)
 	{
-		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles);
+		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles,connectionStatus);
 		// TODO Auto-generated constructor stub
 	}
 
 	public ChercheurEmploi(String nom, String prenom, String sexe, String statutMarital, String natureContrat,
 			String niveauEtude, String anciennete, String dureeSouhaitee, String role, String login, String password,
-			String telephone, String email)
+			String telephone, String email, String connectionStatus)
 	{
-		super(role, login, password, telephone, email);
+		super(role, login, password, telephone, email,connectionStatus);
 		this.nom = nom;
 		this.prenom = prenom;
 		this.sexe = sexe;
@@ -34,9 +34,9 @@ public class ChercheurEmploi extends Internaute
 		this.setRole(role);
 		this.setLogin(login);
 		this.setPassword(password);
-		this.setTelephone(telephone);
 		this.setEmail(email);
-	}
+		this.setConnectionStatus(connectionStatus);	
+		}
 
 	private long	idChercheurEmploi;
 	private String	nom;

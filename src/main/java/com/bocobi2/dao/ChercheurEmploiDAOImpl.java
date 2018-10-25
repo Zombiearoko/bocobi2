@@ -24,7 +24,7 @@ public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
 	private JdbcTemplate	jdbcTemplate;
 
 	private String			sqlInternaute		= "INSERT INTO INTERNAUTE (ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?)";
-	private String			sqlChercheurEmploi	= "INSERT INTO CHERCHEUREMPLOI (IDUTILISATEUR, NOM, PRENOM, SEXE, STATUTMARITAL, NATURECONTRAT, NIVEAUETUDE, ANCIENNETE, DUREECONTRATSOUHAITE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private String			sqlChercheurEmploi	= "INSERT INTO CHERCHEUREMPLOI (IDUTILISATEUR, NOM, PRENOM, SEXE, STATUTMARITAL, NATURECONTRAT, NIVEAUETUDE, ANCIENNETE, DUREECONTRATSOUHAITE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL,CONNECTIONSTATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private ChercheurEmploi	chercheur;
 
 	public ChercheurEmploiDAOImpl(DataSource dataSource){
@@ -61,6 +61,7 @@ public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
 					chercheur.setTelephone((String) row.get("TELEPHONE"));
 					chercheur.setEmail((String) row.get("EMAIL"));
 					chercheur.setIdUtilisateur((long) row.get("IDUTILISATEUR"));
+					chercheur.setConnectionStatus((String) row.get("CONNECTIONSTATUS"));
 					break;
 				}
 			}
@@ -90,7 +91,8 @@ public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
 						chercheurEmploi.getNatureContrat(), chercheurEmploi.getNiveauEtude(),
 						chercheurEmploi.getAnciennete(), chercheurEmploi.getDureeContratSouhaite(),
 						chercheurEmploi.getRole(), chercheurEmploi.getLogin(), chercheurEmploi.getPassword(),
-						chercheurEmploi.getTelephone(), chercheurEmploi.getEmail());
+						chercheurEmploi.getTelephone(), chercheurEmploi.getEmail(),
+						chercheurEmploi.getConnectionStatus());
 				ret = this.findByLogin(chercheurEmploi.getLogin()).getIdChercheurEmploi();
 				System.out.println("la valeur de retour est *****************" + ret);
 			} catch (Exception e){

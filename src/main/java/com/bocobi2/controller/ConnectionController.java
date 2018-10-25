@@ -1,8 +1,12 @@
 package com.bocobi2.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,10 +112,8 @@ public class ConnectionController
 					if (!(auth instanceof AnonymousAuthenticationToken)){
 						logger.info("Connexion Réussie pour {}. ",
 								SecurityContextHolder.getContext().getAuthentication().getName());
-						model.addAttribute("Internaute", "You have been login successfully."
-								+ SecurityContextHolder.getContext().getAuthentication().getName());
-						req.setAttribute("succes", "You have been login successfully."
-								+ SecurityContextHolder.getContext().getAuthentication().getName());
+						model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
+						req.setAttribute("succes", SecurityContextHolder.getContext().getAuthentication().getName());
 						return "chercheur/mesCVs";
 					}
 					return "chercheur/mesCVs";
@@ -134,4 +136,34 @@ public class ConnectionController
 		System.out.println("ma petite laisse tomber c'est pas a ton niveau ma fille");
 		return "connection";
 	}
+	
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+//	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+//	public Map<String, String> logoutMemberPost(HttpServletRequest request, HttpServletResponse response) {
+//		
+//		Map<String,String> message= new HashMap<>();
+//		try {
+//			String userDetails = SecurityContextHolder.getContext().getAuthentication().getName();
+//			Internaute internaute = internauteDAO.findByLogin(userDetails);
+//			Status status = statusRepository.findByStatusName("disconnected");
+//			member.setStatus(status);
+//			member.setMeetingNameConnexion(null);
+//			
+//		
+//			
+//			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//			if (auth != null) {
+//
+//				memberRepository.save(member);
+//				new SecurityContextLogoutHandler().logout(request, response, auth);
+//				message.put("Message", "succes");
+//				return message;
+//			}
+//		} catch (Exception ex) {
+//			message.put("Message", "failed");
+//			return message;
+//		}
+//		message.put("Message", "failed");
+//		return message;
+//}
 }

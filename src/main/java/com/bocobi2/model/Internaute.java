@@ -20,12 +20,27 @@ public class Internaute
 	private String		email;
 	SuiviUtilisateur	detenir[];
 	Historique			effectuer[];
+	private String      connectionStatus;
+
+	/**
+	 * @return the connectionStatus
+	 */
+	public String getConnectionStatus() {
+		return connectionStatus;
+	}
+
+	/**
+	 * @param connectionStatus the connectionStatus to set
+	 */
+	public void setConnectionStatus(String connectionStatus) {
+		this.connectionStatus = connectionStatus;
+	}
 
 	private Set<Role>	roles=new HashSet<>();
 
-	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email,
-			SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles)
-	{
+	
+	public Internaute(long idUtilisateur, String role, String login, String password, String telephone, String email,
+			SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles, String connectionStatus) {
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.role = role;
@@ -35,10 +50,11 @@ public class Internaute
 		this.email = email;
 		this.detenir = detenir;
 		this.effectuer = effectuer;
+		this.connectionStatus = connectionStatus;
 		this.roles = roles;
 	}
 
-	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email)
+	public Internaute(Integer idUtilisateur, String role, String login, String password, String telephone, String email, String connectionStatus)
 	{
 		super();
 		this.idUtilisateur = idUtilisateur;
@@ -49,10 +65,11 @@ public class Internaute
 		this.email = email;
 		this.detenir = detenir;
 		this.effectuer = effectuer;
+		this.connectionStatus = connectionStatus;
 		this.roles = roles;
 	}
 
-	public Internaute(String role, String login, String password, String telephone, String email)
+	public Internaute(String role, String login, String password, String telephone, String email, String connectionStatus)
 	{
 		super();
 		this.idUtilisateur = idUtilisateur;
@@ -63,6 +80,7 @@ public class Internaute
 		this.email = email;
 		this.detenir = detenir;
 		this.effectuer = effectuer;
+		this.connectionStatus = connectionStatus;
 		this.roles = roles;
 	}
 

@@ -59,12 +59,13 @@ public class InternauteDAOImpl implements InternauteDAO{
 		// System.out.println("1");
 		System.out.println(internaute);
 		String sql = "INSERT INTO INTERNAUTE (ROLE,LOGIN, PASSWORD,"
-				+ " TELEPHONE,EMAIL) VALUES (?, ?, ?, ?,?)";
+				+ " TELEPHONE,EMAIL,CONNECTIONSTATUS) VALUES (?, ?, ?, ?,?,?)";
 
 		try{
 			// System.out.println(article);
 			jdbcTemplate.update(sql,  internaute.getRole(), internaute.getLogin(),
-					internaute.getPassword(), internaute.getTelephone(), internaute.getEmail());
+					internaute.getPassword(), internaute.getTelephone(), internaute.getEmail(),
+					internaute.getConnectionStatus());
 			ret =  findByLogin(internaute.getLogin()).getIdUtilisateur();
 			System.out.println("L'ID de l'utilisateur enregistré est *****************" + ret);
 

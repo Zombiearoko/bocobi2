@@ -12,25 +12,20 @@ import java.util.Set;
 public class OffreurEmploi extends Internaute
 {
 	public OffreurEmploi(Integer idUtilisateur, String role, String login, String password, String telephone,
-			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles)
+			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles, String connectionStatus)
 	{
-		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles);
+		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles,connectionStatus);
 		// TODO Auto-generated constructor stub
 	}
 
 	public OffreurEmploi(String raisonSociale, String situationGeographique, String descriptionEntreprise,
-			String adresse, String role, String login, String password, String telephone, String email)
+			String adresse, String role, String login, String password, String telephone, String email, String connectionStatus)
 	{
-		super(role, login, password, telephone, email);
+		super(role, login, password, telephone, email,connectionStatus);
 		this.raisonSociale = raisonSociale;
 		this.situationGeographique = situationGeographique;
 		this.descriptionEntreprise = descriptionEntreprise;
 		this.adresse = adresse;
-		this.setRole(role);
-		this.setLogin(login);
-		this.setPassword(password);
-		this.setTelephone(telephone);
-		this.setEmail(email);
 	}
 
 	public OffreurEmploi()

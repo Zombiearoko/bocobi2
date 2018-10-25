@@ -46,7 +46,7 @@ public class RegistrationController{
 			@RequestParam("password") String password, @RequestParam("phone") String telephone,
 			@RequestParam("email") String email){
 		ChercheurEmploi chercheurEmploi = new ChercheurEmploi(name, surname, sex, statutMarital, natureContrat,
-				niveauEtude, anciennete, dureeContratSouhaitee, "CHERCHEUREMPLOI", login, password, telephone, email);
+				niveauEtude, anciennete, dureeContratSouhaitee, "CHERCHEUREMPLOI", login, password, telephone, email,"DISCONNECTED");
 		long j;
 		try		{
 			j = chercheurEmploiDAO.save(chercheurEmploi);
@@ -74,8 +74,8 @@ public class RegistrationController{
 			@RequestParam("situation_geograpique") String situation_geograpique, @RequestParam("login") String login,
 			@RequestParam("mdp") String mdp, @RequestParam("tel") String tel, @RequestParam("mail") String mail,
 			@RequestParam("addr") String addr, @RequestParam("desc") String desc){
-		OffreurEmploi offreurEmploi = new OffreurEmploi(raison, situation_geograpique, desc, addr, "Offreur Emploi",
-				login, mdp, tel, mail);
+		OffreurEmploi offreurEmploi = new OffreurEmploi(raison, situation_geograpique, desc, addr, "OFFREUREMPLOI",
+				login, mdp, tel, mail,"DISCONNECTED");
 		int j;
 		try	{
 			j = offreurEmploiDAO.save(offreurEmploi);
