@@ -12,6 +12,8 @@ public interface OffreEmploiDAO
 	public List<OffreEmploi> rechercheOffre(String category, String location, String cdd, String cdi, String freelance,
 			String stage);
 
+	public List<OffreEmploi> rechercheOffreCle(String keyword);
+
 	// public List<OffreEmploi> listeOffresParVille(String nom);
 
 	public OffreEmploi details(int id);

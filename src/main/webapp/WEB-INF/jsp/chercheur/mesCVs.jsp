@@ -17,46 +17,69 @@
                 <div class="row">
                     <div id="main" class="col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1">
                         <div class="booking-information travelo-box">
-                            <h1>Recherche dans ma liste de CVs</h1>
+                            <h1>Publier une nouvelle offre d'emploi</h1>
                             <hr />
-                            <div class="table-responsive">
-	                            <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
-									<thead>
-										<tr role="row">
-										<th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 128px;">Numero de CV</th>
-										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 208px;">Formation</th>
-										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 94px;">Competence</th>
-										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 40px;">Experience</th>
-										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 85px;">Residence</th>
-										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 85px;">Date</th>
-										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 72px;">Consulter</th></tr>
-									</thead>
-									<tbody>
-										<tr role="row" class="odd">
-											<td>162,700</td>
-											<td class="sorting_1">Airi Satou</td>
-											<td>Web master</td>
-											<td>Tokyo</td>
-											<td>33</td>
-											<td>2008/11/28</td>
-											<td>                                                
-											<button class="btn-medium uppercase full-width">Consulter</button>
-											</td>
-										</tr>
-										<tr role="row" class="even">
-											<td>700</td>
-											<td class="sorting_1">Angelica Ramos</td>
-											<td>Web master</td>
-											<td>London</td>
-											<td>47</td>
-											<td>2009/10/09</td>
-											<td>                                                
-											<button class="btn-medium uppercase full-width">Consulter</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+                            <c:if test="${ not empty error }">
+						        <div class="alert alert-error center-block">
+	                               Une erreur est survenue !
+	                               <span class="close"></span>
+	                          	</div>
+						    </c:if> 
+                           <form class="booking-form" method="post" action="${pageContext.request.contextPath}/poster_une_offre"  enctype="multipart/form-data">
+                             <div class="person-information">
+                                 <div class="form-group row">
+                                     <div class="col-sm-12 col-md-12">
+                                         <label>Nom de l'emploi <span color: red;> *</span></label>
+                                         <input type="text" required name="category" class="input-text full-width" value="" placeholder="" />
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <div class="col-sm-12 col-md-12">
+                                         <label>Lieux <span color: red;> *</span></label>
+                                         <input type="text" required name="location" class="input-text full-width" value="" placeholder="" />
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <div class="col-sm-12 col-md-12">
+                                         <label>Profil rechercher <span color: red;> *</span></label>
+                                         <div class="selector">
+                                             <select required name="profile" class="full-width">
+                                             	<option value=""></option>
+                                             	<c:forEach var="profile" items="${ profiles }">
+                                                	<option value="<c:out value="${ profile['idProfilRecherche'] }" />"><c:out value="${ profile['competence'] }" /></option>
+                                                 </c:forEach>
+                                             </select>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <div class="col-sm-12 col-md-12">
+                                         <label>Salaire <span color: red;> *</span></label>
+                                         <input type="number" required name="salary" class="input-text full-width" value="" placeholder="" />
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                     <div class="col-sm-12 col-md-12">
+                                         <label>Logo de l'entreprise  <span color: red;> *</span></label>
+                                         <input  type="file" name="file" id="file" style="visibility:hidden; height:0" onChange="change()">
+		                                <div class="input-group input-file" name="Fichier_1">
+		                                    <span class="input-group-btn">
+		                                        <button class="btn btn-default btn-choose" id="choose" type="button" onClick="select();">Choisir</button>
+		                                    </span>
+		                                    <input  type="text" required readonly class="form-control" id="input" style="cursor:pointer" onFocus="select();" />
+		                                    <span class="input-group-btn">
+		                                        <button class="btn btn-warning btn-reset" type="button" onClick="erase();">Effacer</button>
+		                                    </span>
+		                                </div>
+                                     </div>
+                                 </div>
+                                 <div class="form-group row">
+                                  <div class="col-sm-12 col-md-12">
+                                      <button type="submit" class="full-width btn-large">Je publie mon offre</button>
+                                  </div>
+                              </div>
+                             </div>
+                            </form>
                             <br />
                         </div>
                     </div>
@@ -65,7 +88,32 @@
         </section>
 
    <jsp:include page="../../partials/JSImport.jsp"></jsp:include>
-   
+   <script>
+        function select()
+        { 
+            document.getElementById("file").click();
+        }
+        function change()
+        {
+            var value = document.getElementById("file").value;
+            var ext = value.split('.').pop();
+            if(ext != "png" && ext != "jpg")
+            {
+            	alert("Les types de logo valides sont jpg et png !");
+            	document.getElementById("input").value = "";
+            }
+            else
+            {
+            	document.getElementById("input").value = value.split('\\').pop();
+            }
+        }
+        function erase()
+        {
+            document.getElementById("input").value = "";
+        }
+    </script>
 </body>
 </html>
+
+
 

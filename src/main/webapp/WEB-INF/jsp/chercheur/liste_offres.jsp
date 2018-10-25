@@ -11,9 +11,9 @@
                     <li><a href="#">Partout</a></li> -->
                 </ul>
                 <div class="col-md-3 search-box hidden-xs">
-                    <form>
+                    <form method="post" action="${pageContext.request.contextPath}/rechercheCle">
                         <div class="with-icon full-width">
-                            <input type="text" class="input-text full-width" placeholder="Recherchez une offre avec un mot clé">
+                            <input type="text" class="input-text full-width" name="keyword" placeholder="Recherchez une offre avec un mot clé">
                             <button type="submit" class="icon"><i class="soap-icon-search"></i></button>
                         </div>
                     </form>

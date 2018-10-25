@@ -61,6 +61,19 @@ public class ChercheurOffreController
 		return "chercheur/liste_offres";
 	}
 
+	@RequestMapping(value = "/rechercheCle", method = RequestMethod.POST)
+	public String rechercheCle(Model model, HttpServletRequest req)
+	{
+		String keyword = req.getParameter("keyword");
+
+		List<OffreEmploi> offreEmplois = offreEmploiDAO.rechercheOffreCle(keyword);
+
+		req.setAttribute("listeOffres", offreEmplois);
+		req.setAttribute("keyword", keyword);
+
+		return "chercheur/liste_offres";
+	}
+
 	/*
 	 * @RequestMapping(value = "/rechercheV", method = RequestMethod.POST) public
 	 * String rechercheV(Model model, HttpServletRequest req) { String location =

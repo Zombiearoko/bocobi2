@@ -96,6 +96,42 @@ public class OffreEmploiDAOImpl implements OffreEmploiDAO
 
 	@SuppressWarnings({ "rawtypes", "finally" })
 	@Override
+	public List<OffreEmploi> rechercheOffreCle(String keyword)
+	{
+		List<OffreEmploi> list = new ArrayList<OffreEmploi>();
+		// System.out.println("1");
+		System.out.println("query preparing...");
+		String sql = "SELECT * FROM OFFREEMPLOI WHERE NOMEMPLOI LIKE '%" + keyword + "%' OR LIEUXEMPLOI LIKE '%"
+				+ keyword + "%' OR DESCRIPTIONEMPLOI LIKE '%" + keyword + "%'";
+
+		try
+		{
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+
+			for (Map row : rows)
+			{
+				OffreEmploi offreEmploi = new OffreEmploi();
+				offreEmploi.setNomEmploi((String) row.get("NOMEMPLOI"));
+				offreEmploi.setLieuxEmploi((String) row.get("LIEUXEMPLOI"));
+				offreEmploi.setDescriptionEmploi((String) row.get("DESCRIPTIONEMPLOI"));
+				offreEmploi.setOffreurEmploi(offreurEmploiDAO.findById((Integer) row.get("IDOFFREUREMPLOI")));
+				offreEmploi.setLogoEntreprise((String) row.get("LOGOENTREPRISE"));
+				offreEmploi.setIdOffreEmploi((Integer) row.get("IDOFFREEMPLOI"));
+
+				list.add(offreEmploi);
+			}
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			return list;
+		}
+	}
+
+	@SuppressWarnings({ "rawtypes", "finally" })
+	@Override
 	public List<OffreEmploi> rechercheOffre(String category, String location, String cdd, String cdi, String freelance,
 			String stage)
 	{
