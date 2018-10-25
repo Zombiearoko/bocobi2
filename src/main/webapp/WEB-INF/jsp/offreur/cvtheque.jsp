@@ -1,5 +1,11 @@
  		<jsp:include page="../../partials/header.jsp"></jsp:include>
  		 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 		 	<c:if test="${ empty login or login == null  }">
+	 		 	<% 
+	            	request.getServletContext().setAttribute("loggedFirst", 1);
+	            %>
+ 		 		<c:redirect url="connection"/>
+ 		 	</c:if>
 	        <div class="page-title-container style6" style="background-color: #337ab7;">
             <div class="container">
                 <div class="page-title">

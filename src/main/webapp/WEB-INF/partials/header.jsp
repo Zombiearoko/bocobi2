@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
@@ -104,6 +105,7 @@
     
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
+        
     
         <div class="main-header">
     
@@ -120,60 +122,106 @@
     
                 <nav id="main-menu" role="navigation">
                     <ul class="menu">
-                    	<li class="menu-item-has-children">
-                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="#">Mon compte</a>
-                        </li>
-                        <!-- <li class="menu-item-has-children">
-                            <a href="#">Nous contacter</a>
-                        </li> -->
-                        <li class="menu-item-has-children">
-                            <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
-                        </li>
+                    	<c:choose>
+	                    	<c:when test="${ current_user.role == 'CHERCHEUREMPLOI' and not empty current_user }">
+		                    	<li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
+		                        </li>
+		                        <%-- <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
+		                        </li> --%>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/mon_compte">Mon compte</a>
+		                        </li>
+			                   <li class="menu-item-has-children">
+			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
+			                   </li>
+	                        </c:when>
+	                        <c:when test="${ current_user.role == 'OFFREUREMPLOI' and not empty current_user }">
+		                    	<li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="#">Mon compte</a>
+		                        </li>
+			                   <li class="menu-item-has-children">
+			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
+			                   </li>
+	                        </c:when>
+	                        <c:otherwise>
+						        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/connection">Connexion</a>
+		                        </li>
+						    </c:otherwise>
+                        </c:choose>
                     </ul>
                 </nav>
             </div>
     
             <nav id="mobile-menu-01" class="mobile-menu collapse">
 	   			<ul class="menu">
-               		<li class="menu-item-has-children">
-                       <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
-                   </li>
-                   <li class="menu-item-has-children">
-                       <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
-                   </li>
-                   <li class="menu-item-has-children">
-                       <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
-                   </li>
-                   <li class="menu-item-has-children">
-                       <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
-                   </li>
-                   <li class="menu-item-has-children">
-                       <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
-                   </li>
-                   <li class="menu-item-has-children">
-                       <a href="#">Mon compte</a>
-                   </li>
-                   <!-- <li class="menu-item-has-children">
-                       <a href="#">Nous contacter</a>
-                   </li> -->
-                   <li class="menu-item-has-children">
-                       <a href="${pageContext.request.contextPath}/deconnection">Deconnexion</a>
-                   </li>
+               		<c:choose>
+	                    	<c:when test="${ current_user.role == 'CHERCHEUREMPLOI' and not empty current_user }">
+		                    	<li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
+		                        </li>
+		                        <%-- <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
+		                        </li> --%>
+		                        <li class="menu-item-has-children">
+		                            <a href="#">Mon compte</a>
+		                        </li>
+			                   <li class="menu-item-has-children">
+			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
+			                   </li>
+	                        </c:when>
+	                        <c:when test="${ current_user.role == 'OFFREUREMPLOI' and not empty current_user }">
+		                    	<li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="#">Mon compte</a>
+		                        </li>
+			                   <li class="menu-item-has-children">
+			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
+			                   </li>
+	                        </c:when>
+	                        <c:otherwise>
+						        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
+		                        </li>
+		                        <li class="menu-item-has-children">
+		                            <a href="${pageContext.request.contextPath}/connection">Connexion</a>
+		                        </li>
+						    </c:otherwise>
+                        </c:choose>
                </ul>
             </nav>
         </div>

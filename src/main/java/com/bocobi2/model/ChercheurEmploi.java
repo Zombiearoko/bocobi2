@@ -15,7 +15,7 @@ public class ChercheurEmploi extends Internaute
 	public ChercheurEmploi(Integer idUtilisateur, String role, String login, String password, String telephone,
 			String email, SuiviUtilisateur[] detenir, Historique[] effectuer, Set<Role> roles, String connectionStatus)
 	{
-		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles,connectionStatus);
+		super(idUtilisateur, role, login, password, telephone, email, detenir, effectuer, roles, connectionStatus);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -23,21 +23,21 @@ public class ChercheurEmploi extends Internaute
 			String niveauEtude, String anciennete, String dureeSouhaitee, String role, String login, String password,
 			String telephone, String email, String connectionStatus)
 	{
-		super(role, login, password, telephone, email,connectionStatus);
+		super(role, login, password, telephone, email, connectionStatus);
 		this.nom = nom;
 		this.prenom = prenom;
 		this.sexe = sexe;
 		this.statutMarital = statutMarital;
 		this.natureContrat = natureContrat;
 		this.niveauEtude = niveauEtude;
-		this.Anciennete = anciennete;
-		this.DureeContratSouhaite = dureeSouhaitee;
+		this.anciennete = anciennete;
+		this.dureeContratSouhaite = dureeSouhaitee;
 		this.setRole(role);
 		this.setLogin(login);
 		this.setPassword(password);
 		this.setEmail(email);
-		this.setConnectionStatus(connectionStatus);	
-		}
+		this.setConnectionStatus(connectionStatus);
+	}
 
 	private long	idChercheurEmploi;
 	private String	nom;
@@ -47,8 +47,8 @@ public class ChercheurEmploi extends Internaute
 	private String	role;
 	private String	natureContrat;
 	private String	niveauEtude;
-	private String	Anciennete;
-	private String	DureeContratSouhaite;
+	private String	anciennete;
+	private String	dureeContratSouhaite;
 	CV				soumettre[];
 
 	/**
@@ -185,16 +185,16 @@ public class ChercheurEmploi extends Internaute
 	 */
 	public String getAnciennete()
 	{
-		return Anciennete;
+		return anciennete;
 	}
 
 	/**
 	 * @param anciennete
 	 *            the anciennete to set
 	 */
-	public void setAnciennete(String anciennete)
+	public void setAnciennete(String Anciennete)
 	{
-		Anciennete = anciennete;
+		anciennete = anciennete;
 	}
 
 	/**
@@ -202,16 +202,16 @@ public class ChercheurEmploi extends Internaute
 	 */
 	public String getDureeContratSouhaite()
 	{
-		return DureeContratSouhaite;
+		return dureeContratSouhaite;
 	}
 
 	/**
 	 * @param dureeContratSouhaite
 	 *            the dureeContratSouhaite to set
 	 */
-	public void setDureeContratSouhaite(String dureeContratSouhaite)
+	public void setDureeContratSouhaite(String DureeContratSouhaite)
 	{
-		DureeContratSouhaite = dureeContratSouhaite;
+		dureeContratSouhaite = DureeContratSouhaite;
 	}
 
 	/**
@@ -236,16 +236,18 @@ public class ChercheurEmploi extends Internaute
 		super();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "ChercheurEmploi [idChercheurEmploi=" + idChercheurEmploi + ", nom=" + nom + ", prenom=" + prenom
 				+ ", sexe=" + sexe + ", statutMarital=" + statutMarital + ", role=" + role + ", natureContrat="
-				+ natureContrat + ", niveauEtude=" + niveauEtude + ", Anciennete=" + Anciennete
-				+ ", DureeContratSouhaite=" + DureeContratSouhaite + ", soumettre=" + Arrays.toString(soumettre) + "]";
+				+ natureContrat + ", niveauEtude=" + niveauEtude + ", Anciennete=" + anciennete
+				+ ", DureeContratSouhaite=" + dureeContratSouhaite + ", soumettre=" + Arrays.toString(soumettre) + "]";
 	}
 
-	
 } // End Class chercheurEmploi

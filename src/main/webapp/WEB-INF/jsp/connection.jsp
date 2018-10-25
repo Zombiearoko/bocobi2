@@ -29,6 +29,12 @@
                                <span class="close"></span>
                           	</div>
 					    </c:if> 
+					    <c:if test="${ loggedFirst eq 1 or not empty loggedFirst }">
+					        <div class="alert alert-info center-block">
+                               <c:out value="Vous devez etre connecté pour continuer !" />
+                               <span class="close"></span>
+                          	</div>
+					    </c:if> 
 					    <c:if test="${ registration_ok eq 1 }">
 					        <div class="alert alert-info center-block">
                                Enregistrement reussie, connecter vous pour continuer !

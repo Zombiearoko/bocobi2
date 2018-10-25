@@ -1,22 +1,24 @@
 package com.bocobi2.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import com.bocobi2.model.Internaute;
 import com.bocobi2.model.OffreurEmploi;
 
 public class OffreurEmploiDAOImpl implements OffreurEmploiDAO
 {
+	@SuppressWarnings("unused")
 	private String			sqlInternaute		= "INSERT INTO INTERNAUTE (ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?)";
-	private String			sqlOffreurEmploi	= "INSERT INTO OFFREUREMPLOI (IDUTILISATEUR, RAISONSOCIALE, SITUATIONGEOGRAPHIQUE, DESCRIPTIONENTREPRISE, ADRESSE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private String			sqlOffreurEmploi	= "INSERT INTO OFFREUREMPLOI (IDUTILISATEUR, RAISONSOCIALE, SITUATIONGEOGRAPHIQUE, DESCRIPTIONENTREPRISE, ADRESSE, ROLE, LOGIN, PASSWORD, TELEPHONE, EMAIL,CONNECTIONSTATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private JdbcTemplate	jdbcTemplate;
 
@@ -27,48 +29,41 @@ public class OffreurEmploiDAOImpl implements OffreurEmploiDAO
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	@Autowired
+	InternauteDAO internauteDAO;
+
 	@SuppressWarnings("finally")
 	@Override
-	public int save(OffreurEmploi offreurEmploi) throws Exception
+	public long save(OffreurEmploi offreurEmploi) throws Exception
 	{
-		int ret = -1;
+		long ret = -1;
+		@SuppressWarnings("unused")
 		KeyHolder holder = new GeneratedKeyHolder();
 		// System.out.println("1");
 		offreur = offreurEmploi;
-
-		jdbcTemplate.update(new PreparedStatementCreator()
+		long n = internauteDAO.save((Internaute) offreurEmploi);
+		if (n != -1)
 		{
-			@Override
-			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException
+			try
 			{
-				final PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sqlInternaute,
-						Statement.RETURN_GENERATED_KEYS);
-				ps.setString(1, offreur.getRole());
-				ps.setString(2, offreur.getLogin());
-				ps.setString(3, offreur.getPassword());
-				ps.setString(4, offreur.getTelephone());
-				ps.setString(5, offreur.getEmail());
-				return ps;
+				@SuppressWarnings("unused")
+				int i = jdbcTemplate.update(sqlOffreurEmploi, n, offreurEmploi.getRaisonSociale(),
+						offreurEmploi.getSituationGeographique(), offreurEmploi.getDescriptionEntreprise(),
+						offreurEmploi.getAdresse(), offreurEmploi.getRole(), offreurEmploi.getLogin(),
+						offreurEmploi.getPassword(), offreurEmploi.getTelephone(), offreurEmploi.getEmail(),
+						offreurEmploi.getConnectionStatus());
+				ret = this.findByLogin(offreurEmploi.getLogin()).getIdOffreurEmploi();
+				System.out.println("la valeur de retour est *****************" + ret);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			} finally
+			{
+				return ret;
 			}
-		}, holder);
-
-		Integer oldId = holder.getKey().intValue();
-		System.out.println("----------------------------------------------" + oldId);
-
-		try
+		} else
 		{
-			int i = jdbcTemplate.update(sqlOffreurEmploi, oldId, offreurEmploi.getRaisonSociale(),
-					offreurEmploi.getSituationGeographique(), offreurEmploi.getDescriptionEntreprise(),
-					offreurEmploi.getAdresse(), offreurEmploi.getRole(), offreurEmploi.getLogin(),
-					offreurEmploi.getPassword(), offreurEmploi.getTelephone(), offreurEmploi.getEmail());
-			ret = i;
-			System.out.println("la valeur de retour est *****************" + ret);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			return ret;
+			return -2;
 		}
 
 	}
@@ -108,5 +103,40 @@ public class OffreurEmploiDAOImpl implements OffreurEmploiDAO
 		{
 			return offreur;
 		}
+	}
+
+	@Override
+	public OffreurEmploi findByLogin(String login)
+	{
+		offreur = null;
+		// System.out.println("1");
+		System.out.println("query preparing1...");
+		String sql = "SELECT * FROM CHERCHEUREMPLOI WHERE LOGIN = \"" + login + "\"";
+
+		return jdbcTemplate.query(sql, new ResultSetExtractor<OffreurEmploi>()
+		{
+
+			@Override
+			public OffreurEmploi extractData(ResultSet rs) throws SQLException, DataAccessException
+			{
+				System.out.println("query preparing2...");
+				if (rs.next())
+				{
+					offreur = new OffreurEmploi();
+					offreur.setLogin((String) rs.getString("LOGIN"));
+					offreur.setRole((String) rs.getString("ROLE"));
+					offreur.setPassword((String) rs.getString("PASSWORD"));
+					offreur.setTelephone((String) rs.getString("TELEPHONE"));
+					offreur.setEmail((String) rs.getString("EMAIL"));
+					offreur.setIdUtilisateur(rs.getLong("IDUTILISATEUR"));
+					offreur.setIdOffreurEmploi(rs.getInt("IDOFFREUREMPLOI"));
+					offreur.setConnectionStatus(rs.getString("CONNECTIONSTATUS"));
+					return offreur;
+				}
+				return null;
+			}
+
+		});
+
 	}
 }
