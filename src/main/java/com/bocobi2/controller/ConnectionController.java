@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -89,12 +91,13 @@ public class ConnectionController
 
 		return userDetails;
 
-}
+	}
 	@RequestMapping(value = { "/connectionChercheurEmploi" }, method = RequestMethod.POST)
 	public String login(Model model, @RequestParam("login") String login1,
 			@RequestParam("motdepasse")String password1,
 			HttpServletRequest req)	{
 		String login = login1;
+		HttpSession session = req.getSession();
 		String password = password1.trim();
 		try{
 			System.out.println("c'est le try");
@@ -110,10 +113,16 @@ public class ConnectionController
 					SecurityContextHolder.getContext().setAuthentication(authToken);
 					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 					if (!(auth instanceof AnonymousAuthenticationToken)){
+						ChercheurEmploi chercheur=chercheurEmploiDAO.findByLogin(login);
+						chercheur.setConnectionStatus("CONNECTED");
+						chercheurEmploiDAO.update(chercheur);
+						internauteDAO.update(chercheur);
 						logger.info("Connexion Réussie pour {}. ",
 								SecurityContextHolder.getContext().getAuthentication().getName());
 						model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
 						req.setAttribute("succes", SecurityContextHolder.getContext().getAuthentication().getName());
+						session.setAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
+						 
 						return "chercheur/mesCVs";
 					}
 					return "chercheur/mesCVs";
@@ -136,34 +145,23 @@ public class ConnectionController
 		System.out.println("ma petite laisse tomber c'est pas a ton niveau ma fille");
 		return "connection";
 	}
-	
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
-//	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-//	public Map<String, String> logoutMemberPost(HttpServletRequest request, HttpServletResponse response) {
-//		
-//		Map<String,String> message= new HashMap<>();
-//		try {
-//			String userDetails = SecurityContextHolder.getContext().getAuthentication().getName();
-//			Internaute internaute = internauteDAO.findByLogin(userDetails);
-//			Status status = statusRepository.findByStatusName("disconnected");
-//			member.setStatus(status);
-//			member.setMeetingNameConnexion(null);
-//			
-//		
-//			
-//			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//			if (auth != null) {
-//
-//				memberRepository.save(member);
-//				new SecurityContextLogoutHandler().logout(request, response, auth);
-//				message.put("Message", "succes");
-//				return message;
-//			}
-//		} catch (Exception ex) {
-//			message.put("Message", "failed");
-//			return message;
-//		}
-//		message.put("Message", "failed");
-//		return message;
-//}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutMemberPost(Model model,HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String login=(String) session.getAttribute("login");
+	    logger.debug("While trying to logout {} .", login);
+		if (login != null) {
+			ChercheurEmploi chercheur=chercheurEmploiDAO.findByLogin(login);
+			chercheur.setConnectionStatus("DISCONNECTED");
+			chercheurEmploiDAO.update(chercheur);
+			internauteDAO.update(chercheur);
+			session.removeAttribute("login");
+			logger.info("Déconnexion Réussie pour {}. ",chercheur);
+			return "connection";		
+		}
+		return "index";
+	}
 }

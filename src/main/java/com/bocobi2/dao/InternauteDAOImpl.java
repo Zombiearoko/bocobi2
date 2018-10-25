@@ -43,6 +43,7 @@ public class InternauteDAOImpl implements InternauteDAO{
 					internaute.setTelephone((String) rs.getString("TELEPHONE"));
 					internaute.setEmail((String) rs.getString("EMAIL"));
 					internaute.setIdUtilisateur(rs.getLong("IDUTILISATEUR") );
+					internaute.setConnectionStatus(rs.getString("CONNECTIONSTATUS"));
 					return internaute;
 				}
 				return null;
@@ -53,8 +54,7 @@ public class InternauteDAOImpl implements InternauteDAO{
 
 	@SuppressWarnings("finally")
 	@Override
-	public long save(Internaute internaute)
-	{
+	public long save(Internaute internaute)	{
 		long ret = -1;
 		// System.out.println("1");
 		System.out.println(internaute);
@@ -96,6 +96,29 @@ public class InternauteDAOImpl implements InternauteDAO{
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public long update(Internaute internaute) {
+		long ret = -1;
+		// System.out.println("1");
+		System.out.println(internaute);
+		String sql = "UPDATE INTERNAUTE set ROLE=? ,LOGIN=?, PASSWORD=?,"
+				+ " TELEPHONE=?,EMAIL=?,CONNECTIONSTATUS=? WHERE IDUTILISATEUR=?";
+				
+		try{
+			// System.out.println(article);
+			jdbcTemplate.update(sql,  internaute.getRole(), internaute.getLogin(),
+					internaute.getPassword(), internaute.getTelephone(), internaute.getEmail(),
+					internaute.getConnectionStatus(),internaute.getIdUtilisateur());
+			ret =  findByLogin(internaute.getLogin()).getIdUtilisateur();
+			System.out.println("Internaute mis à jour avec succès le voilà : *****************" + findByLogin(internaute.getLogin()));
+
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			return ret;
+		}
 	}
 
 }

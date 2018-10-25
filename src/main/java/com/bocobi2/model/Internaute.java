@@ -7,6 +7,7 @@
 **************************************************************************/
 package com.bocobi2.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -245,6 +246,18 @@ public class Internaute
 		this.roles = roles;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Internaute [idUtilisateur=" + idUtilisateur + ", role=" + role + ", login=" + login + ", password="
+				+ password + ", telephone=" + telephone + ", email=" + email + ", detenir=" + Arrays.toString(detenir)
+				+ ", effectuer=" + Arrays.toString(effectuer) + ", connectionStatus=" + connectionStatus + ", roles="
+				+ roles + "]";
+	}
+
+	
 	// Operations
 
 } // End Class Internaute

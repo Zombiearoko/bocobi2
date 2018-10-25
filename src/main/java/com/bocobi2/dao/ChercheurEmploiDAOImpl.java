@@ -2,6 +2,7 @@ package com.bocobi2.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import com.bocobi2.model.ChercheurEmploi;
@@ -32,52 +35,49 @@ public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
 	}
 
 	@Override
-	public ChercheurEmploi findByLogin(String login)
-	{
+	public ChercheurEmploi findByLogin(String login){
 		chercheur=null;
 		// System.out.println("1");
 		System.out.println("query preparing1...");
 		String sql = "SELECT * FROM CHERCHEUREMPLOI WHERE LOGIN = \"" + login + "\"";
 
-		try{
-			List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		return jdbcTemplate.query(sql, new ResultSetExtractor<ChercheurEmploi>() {
 
-			if (rows.size() != 0)			{
-				chercheur = new ChercheurEmploi();
-				for (Map row : rows){
-					chercheur.setIdChercheurEmploi((int) row.get("IDCHERCHEUREMPLOI"));
-					chercheur.setDureeContratSouhaite((String) row.get("DUREECONTRATSOUHAITE"));
-					chercheur.setAnciennete((String) row.get("ANCIENNETE"));
-					chercheur.setNiveauEtude((String) row.get("NIVEAUETUDE"));
-					chercheur.setNatureContrat((String) row.get("NATURECONTRAT"));
-					chercheur.setStatutMarital((String) row.get("STATUTMARITAL"));
-					chercheur.setSexe((String) row.get("SEXE"));
-					chercheur.setPrenom((String) row.get("PRENOM"));;
-					chercheur.setNom((String) row.get("NOM"));;
-					chercheur.setAnciennete((String) row.get("ANCIENNETE"));
-					chercheur.setLogin((String) row.get("LOGIN"));
-					chercheur.setRole((String) row.get("ROLE"));
-					chercheur.setPassword((String) row.get("PASSWORD"));
-					chercheur.setTelephone((String) row.get("TELEPHONE"));
-					chercheur.setEmail((String) row.get("EMAIL"));
-					chercheur.setIdUtilisateur((long) row.get("IDUTILISATEUR"));
-					chercheur.setConnectionStatus((String) row.get("CONNECTIONSTATUS"));
-					break;
+			@Override
+			public ChercheurEmploi extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
+				System.out.println("query preparing2...");
+				if (rs.next()) {
+					chercheur = new ChercheurEmploi();
+					chercheur.setLogin((String) rs.getString("LOGIN"));
+					chercheur.setRole((String) rs.getString("ROLE"));
+					chercheur.setPassword((String) rs.getString("PASSWORD"));
+					chercheur.setTelephone((String) rs.getString("TELEPHONE"));
+					chercheur.setEmail((String) rs.getString("EMAIL"));
+					chercheur.setIdUtilisateur(rs.getLong("IDUTILISATEUR") );
+					chercheur.setIdChercheurEmploi(rs.getLong("IDCHERCHEUREMPLOI") );
+					chercheur.setConnectionStatus(rs.getString("CONNECTIONSTATUS"));
+					chercheur.setDureeContratSouhaite(rs.getString("DUREECONTRATSOUHAITE"));
+					chercheur.setAnciennete(rs.getString("ANCIENNETE"));
+					chercheur.setNiveauEtude(rs.getString("NIVEAUETUDE"));
+					chercheur.setNatureContrat(rs.getString("NATURECONTRAT"));
+					chercheur.setStatutMarital(rs.getString("STATUTMARITAL"));
+					chercheur.setSexe(rs.getString("SEXE"));
+					chercheur.setPrenom(rs.getString("PRENOM"));
+					chercheur.setNom(rs.getString("NOM"));
+					chercheur.setAnciennete(rs.getString("ANCIENNETE"));
+					return chercheur;
 				}
+				return null;
 			}
 
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			return chercheur;
-		}
+		});
+
 	}
 
 	@SuppressWarnings("finally")
 	@Override
-	public long save(ChercheurEmploi chercheurEmploi) throws Exception{
+	public long save(ChercheurEmploi chercheurEmploi){
 		long ret = -1;
 		KeyHolder holder = new GeneratedKeyHolder();
 		// System.out.println("1");
@@ -103,6 +103,34 @@ public class ChercheurEmploiDAOImpl implements ChercheurEmploiDAO{
 		}
 		else{
 			return -2;
+		}
+	}
+
+	@Override
+	public long update(ChercheurEmploi chercheurEmploi) {
+		long ret = -1;
+		// System.out.println("1");
+		System.out.println(chercheurEmploi);
+		String sql = "UPDATE CHERCHEUREMPLOI set IDUTILISATEUR=? ,NOM=?, PRENOM=?,"
+				+ " SEXE=?,STATUTMARITAL=?,NATURECONTRAT=?,NIVEAUETUDE=?,ANCIENNETE=?"
+				+ ",DUREECONTRATSOUHAITE=?,ROLE=?"
+				+ ",LOGIN=?,PASSWORD=?"
+				+ ",TELEPHONE=?,EMAIL=?,CONNECTIONSTATUS=? WHERE IDCHERCHEUREMPLOI=?";
+		try{
+			int i = jdbcTemplate.update(sql, chercheurEmploi.getIdUtilisateur(), chercheurEmploi.getNom(),
+					chercheurEmploi.getPrenom(), chercheurEmploi.getSexe(), chercheurEmploi.getStatutMarital(),
+					chercheurEmploi.getNatureContrat(), chercheurEmploi.getNiveauEtude(),
+					chercheurEmploi.getAnciennete(), chercheurEmploi.getDureeContratSouhaite(),
+					chercheurEmploi.getRole(), chercheurEmploi.getLogin(), chercheurEmploi.getPassword(),
+					chercheurEmploi.getTelephone(), chercheurEmploi.getEmail(),
+					chercheurEmploi.getConnectionStatus(), chercheurEmploi.getIdChercheurEmploi());
+			ret = this.findByLogin(chercheurEmploi.getLogin()).getIdChercheurEmploi();
+			System.out.println("CHERCHEUREMPLOI mis à jour avec succès, le voilà: *****************" + this.findByLogin(chercheurEmploi.getLogin()));
+
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally{
+			return ret;
 		}
 	}
 }

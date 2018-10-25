@@ -7,6 +7,7 @@
 **************************************************************************/
 package com.bocobi2.model;
 
+import java.util.Arrays;
 import java.util.Set;
 
 public class ChercheurEmploi extends Internaute
@@ -235,4 +236,16 @@ public class ChercheurEmploi extends Internaute
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ChercheurEmploi [idChercheurEmploi=" + idChercheurEmploi + ", nom=" + nom + ", prenom=" + prenom
+				+ ", sexe=" + sexe + ", statutMarital=" + statutMarital + ", role=" + role + ", natureContrat="
+				+ natureContrat + ", niveauEtude=" + niveauEtude + ", Anciennete=" + Anciennete
+				+ ", DureeContratSouhaite=" + DureeContratSouhaite + ", soumettre=" + Arrays.toString(soumettre) + "]";
+	}
+
+	
 } // End Class chercheurEmploi

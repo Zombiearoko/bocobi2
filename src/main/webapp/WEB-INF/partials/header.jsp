@@ -142,7 +142,7 @@
                             <a href="#">Nous contacter</a>
                         </li> -->
                         <li class="menu-item-has-children">
-                            <a href="${pageContext.request.contextPath}/deconnection">Deconnexion</a>
+                            <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
                         </li>
                     </ul>
                 </nav>
