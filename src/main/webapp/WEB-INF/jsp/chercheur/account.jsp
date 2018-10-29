@@ -1,10 +1,4 @@
  	<jsp:include page="../../partials/header.jsp"></jsp:include>
- 	<script type="text/javascript">
-	  function update(){
-		     window.location.reload(); 
-	  }
-	  setInterval('update();',1000);
-	</script>
  		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <div class="page-title-container style6" style="background-color: #337ab7;">
             <div class="container">
