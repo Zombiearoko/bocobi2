@@ -75,7 +75,7 @@ public class RegistrationController
 			return "registration";
 		}
 	}
-
+ 
 	@RequestMapping(value = "/registration_12115", method = RequestMethod.POST)
 	public String registrationOffreur(Model model, HttpServletRequest req, @RequestParam("raison") String raison,
 			@RequestParam("situation_geograpique") String situation_geograpique, @RequestParam("login") String login,

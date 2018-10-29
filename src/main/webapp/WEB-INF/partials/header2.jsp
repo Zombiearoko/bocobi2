@@ -30,7 +30,10 @@
     
     <!-- Main Style -->
     <link id="main-style" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-   
+    <c:if test="${ current_user==null }">
+	<meta http-equiv="Refresh"
+		content="1; url=${pageContext.request.contextPath}/mon_compte">
+</c:if>
     <!-- Updated Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/updates.css">
 

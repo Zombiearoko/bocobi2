@@ -125,10 +125,10 @@ public class ConnectionController
 								+ "\n\n\n-------------------------------");
 						session.setAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
 						session.setAttribute("current_user", chercheur);
-
-						return "chercheur/account";
+						return "redirect:/mon_compte";
+//						return "chercheur/account";
 					}
-					return "chercheur/account";
+					return "redirect:/connection";
 				} else
 				{
 					logger.error("Internaute with password {} not found. ", password);
@@ -149,7 +149,7 @@ public class ConnectionController
 			ex.printStackTrace();
 		}
 		System.out.println("ma petite laisse tomber c'est pas a ton niveau ma fille");
-		return "connection";
+	    return "redirect:/connection";
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -168,7 +168,7 @@ public class ConnectionController
 			internauteDAO.update(chercheur);
 			session.removeAttribute("login");
 			session.removeAttribute("current_user");
-			logger.info("Dï¿½connexion Rï¿½ussie pour {}. ", chercheur);
+			logger.info("Déconnexion Réussie pour {}. ", chercheur);
 			return "connection";
 		}
 		return "index";
