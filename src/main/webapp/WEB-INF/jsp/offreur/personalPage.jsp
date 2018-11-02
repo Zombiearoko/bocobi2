@@ -60,7 +60,7 @@
                     <h2 class="entry-title" style="color: yellow;">Vous êtes connecté en tant que </h2>
                 </div>
                 <ul class="breadcrumbs"> 
-                    <li>${ current_user.prenom } ${ current_user.nom }</li>
+                    <li style="cursor: pointer;"><a>${ current_user.login }</a></li>
                <!--     <li><a href="#">Tout types</a></li>
                     <li><a href="#">Partout</a></li> -->
                 </ul>
@@ -82,11 +82,11 @@
                         <div class="col-sm-6 col-md-4">
                             <article class="box animated" data-animation-type="fadeInDown">
                                 <figure>
-                                    <a href="${pageContext.request.contextPath}/trouver_une_offre">
+                                    <a href="${pageContext.request.contextPath}/poster_une_offre">
                                     	<img src="${pageContext.request.contextPath}/resources/images/home.jpg" alt="Search job cover">
                                    	</a>
                                     <figcaption>
-                                        <h2 class="caption-title">Mes CVs</h2>
+                                        <h2 class="caption-title">Publier une offre d'emploi</h2>
                                     </figcaption>
                                 </figure>
                             </article>
@@ -96,7 +96,7 @@
                                 <figure>
                                     <a href="#"><img src="${pageContext.request.contextPath}/resources/images/home.jpg" alt=""></a>
                                     <figcaption>
-                                        <h2 class="caption-title">Contacter l'administration</h2>
+                                        <h2 class="caption-title">Consulter les profils adaptés</h2>
                                     </figcaption>
                                 </figure>
                             </article>
@@ -104,9 +104,9 @@
                         <div class="col-sm-6 col-md-4">
                             <article class="box animated" data-animation-type="fadeInRight">
                                 <figure>
-                                    <a href="#"><img src="${pageContext.request.contextPath}/resources/images/home.jpg" alt=""></a>
+                                    <a href="${pageContext.request.contextPath}/cv_theque"><img src="${pageContext.request.contextPath}/resources/images/home.jpg" alt=""></a>
                                     <figcaption>
-                                        <h2 class="caption-title">Autre</h2>
+                                        <h2 class="caption-title">Consulter la CVthèque</h2>
                                     </figcaption>
                                 </figure>
                             </article>

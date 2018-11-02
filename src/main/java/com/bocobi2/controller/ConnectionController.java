@@ -23,6 +23,7 @@ import com.bocobi2.dao.InternauteDAO;
 import com.bocobi2.dao.OffreurEmploiDAO;
 import com.bocobi2.model.ChercheurEmploi;
 import com.bocobi2.model.Internaute;
+import com.bocobi2.model.OffreurEmploi;
 
 /**
  * This controller routes accesses to the application to the appropriate hanlder
@@ -100,46 +101,64 @@ public class ConnectionController
 			System.out.println("c'est le try");
 			Internaute internaute = new Internaute();
 			internaute = internauteDAO.findByLogin(login);
+			String role = internaute.getRole();
 			System.out.println(internaute);
+			System.out.println("LE LOGIN =========================================>>>>>>>>>>>>>>>>>>>>>>>" + login);
+			System.out
+					.println("LE PASSWORD =========================================>>>>>>>>>>>>>>>>>>>>>>>" + password);
 			req.setAttribute("oldLogin", login);
-			if (internaute != null)
+			if (password.equals(internaute.getPassword()))
 			{
-				if (password.equals(internaute.getPassword()))
+				UserDetails users = userDetailsService.loadUserByUsername(login);
+				Authentication authToken = new UsernamePasswordAuthenticationToken(users, null, users.getAuthorities());
+				SecurityContextHolder.getContext().setAuthentication(authToken);
+				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				if (!(auth instanceof AnonymousAuthenticationToken))
 				{
-					UserDetails users = userDetailsService.loadUserByUsername(login);
-					Authentication authToken = new UsernamePasswordAuthenticationToken(users, null,
-							users.getAuthorities());
-					SecurityContextHolder.getContext().setAuthentication(authToken);
-					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-					if (!(auth instanceof AnonymousAuthenticationToken))
+					if (role.equals("CHERCHEUREMPLOI"))
 					{
+
 						ChercheurEmploi chercheur = chercheurEmploiDAO.findByLogin(login);
 						chercheur.setConnectionStatus("CONNECTED");
 						chercheurEmploiDAO.update(chercheur);
 						internauteDAO.update(chercheur);
-						logger.info("Connexion Rï¿½ussie pour {}. ",
-								SecurityContextHolder.getContext().getAuthentication().getName());
-						model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
-						req.setAttribute("succes", SecurityContextHolder.getContext().getAuthentication().getName());
-						System.out.println("--------------------------------\n\n\n\n" + chercheur.getRole()
-								+ "\n\n\n-------------------------------");
-						session.setAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
 						session.setAttribute("current_user", chercheur);
-						return "redirect:/mon_compte";
-//						return "chercheur/account";
 					}
-					return "redirect:/connection";
-				} else
-				{
-					logger.error("Internaute with password {} not found. ", password);
-					model.addAttribute("errorPassword", "Password not found.");
-					req.setAttribute("errorLogin", "Password not found.");
+					if (role.equals("OFFREUREMPLOI"))
+					{
+						OffreurEmploi offreur = offreurEmploiDAO.findByLogin(login);
+						offreur.setConnectionStatus("CONNECTED");
+						offreurEmploiDAO.update(offreur);
+						internauteDAO.update(offreur);
+						session.setAttribute("current_user", offreur);
+					}
+
+					logger.info("Connexion Rï¿½ussie pour {}. ",
+							SecurityContextHolder.getContext().getAuthentication().getName());
+					model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getName());
+					req.setAttribute("succes", SecurityContextHolder.getContext().getAuthentication().getName());
+					// System.out.println("--------------------------------\n\n\n\n" +
+					// chercheur.getRole()
+					// + "\n\n\n-------------------------------");
+					session.setAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
+
+					if (role.equals("CHERCHEUREMPLOI"))
+					{
+						return "redirect:/mon_compte";
+					}
+					if (role.equals("OFFREUREMPLOI"))
+					{
+						return "redirect:/mon_compte_offreur";
+					}
+
+					// return "chercheur/account";
 				}
+				return "redirect:/connection";
 			} else
 			{
-				logger.error("User with login {} not found.", login);
-				model.addAttribute("errorLogin", "login not found, user " + login + " doesn't exist1");
-				req.setAttribute("errorLogin", "login not found, user " + login + " doesn't exist1");
+				logger.error("Internaute with password {} not found. ", password);
+				model.addAttribute("errorPassword", "Password not found.");
+				req.setAttribute("errorLogin", "Password not found.");
 			}
 		} catch (Exception ex)
 		{
@@ -149,26 +168,36 @@ public class ConnectionController
 			ex.printStackTrace();
 		}
 		System.out.println("ma petite laisse tomber c'est pas a ton niveau ma fille");
-	    return "redirect:/connection";
+		return "redirect:/connection";
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutMemberPost(Model model, HttpServletRequest request, HttpServletResponse response)
 	{
 		HttpSession session = request.getSession();
 		// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String login = (String) session.getAttribute("login");
+		String role = ((Internaute) session.getAttribute("current_user")).getRole();
 		logger.debug("While trying to logout {} .", login);
 		if (login != null)
 		{
-			ChercheurEmploi chercheur = chercheurEmploiDAO.findByLogin(login);
-			chercheur.setConnectionStatus("DISCONNECTED");
-			chercheurEmploiDAO.update(chercheur);
-			internauteDAO.update(chercheur);
+			if (role.equals("CHERCHEUREMPLOI"))
+			{
+				ChercheurEmploi chercheur = chercheurEmploiDAO.findByLogin(login);
+				chercheur.setConnectionStatus("DISCONNECTED");
+				chercheurEmploiDAO.update(chercheur);
+				internauteDAO.update(chercheur);
+			}
+			if (role.equals("OFFREUREMPLOI"))
+			{
+				OffreurEmploi offreur = offreurEmploiDAO.findByLogin(login);
+				offreur.setConnectionStatus("DISCONNECTED");
+				offreurEmploiDAO.update(offreur);
+				internauteDAO.update(offreur);
+			}
 			session.removeAttribute("login");
 			session.removeAttribute("current_user");
-			logger.info("Déconnexion Réussie pour {}. ", chercheur);
+			// logger.info("Dï¿½connexion Rï¿½ussie pour {}. ", chercheur);
 			return "connection";
 		}
 		return "index";

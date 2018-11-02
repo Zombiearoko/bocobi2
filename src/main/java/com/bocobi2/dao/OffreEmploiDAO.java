@@ -9,6 +9,8 @@ public interface OffreEmploiDAO
 
 	public List<OffreEmploi> listeOffres();
 
+	public List<OffreEmploi> maListeOffres(Integer idOffreur);
+
 	public List<OffreEmploi> rechercheOffre(String category, String location, String cdd, String cdi, String freelance,
 			String stage);
 

@@ -209,4 +209,40 @@ public class OffreEmploiDAOImpl implements OffreEmploiDAO
 		}
 	}
 
+	@SuppressWarnings("finally")
+	@Override
+	public List<OffreEmploi> maListeOffres(Integer idOffreur)
+	{
+		List<OffreEmploi> list = new ArrayList<OffreEmploi>();
+		// System.out.println("1");
+		System.out.println("query preparing...");
+		String sql = "SELECT * FROM OFFREEMPLOI WHERE IDOFFREUREMPLOI = " + idOffreur;
+
+		try
+		{
+			List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+
+			for (@SuppressWarnings("rawtypes")
+			Map row : rows)
+			{
+				OffreEmploi offreEmploi = new OffreEmploi();
+				offreEmploi.setNomEmploi((String) row.get("NOMEMPLOI"));
+				offreEmploi.setLieuxEmploi((String) row.get("LIEUXEMPLOI"));
+				offreEmploi.setDescriptionEmploi((String) row.get("DESCRIPTIONEMPLOI"));
+				offreEmploi.setOffreurEmploi(offreurEmploiDAO.findById((Integer) row.get("IDOFFREUREMPLOI")));
+				offreEmploi.setLogoEntreprise((String) row.get("LOGOENTREPRISE"));
+				offreEmploi.setIdOffreEmploi((Integer) row.get("IDOFFREEMPLOI"));
+
+				list.add(offreEmploi);
+			}
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			return list;
+		}
+	}
+
 }

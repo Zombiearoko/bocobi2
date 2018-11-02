@@ -111,7 +111,7 @@ public class OffreurEmploiDAOImpl implements OffreurEmploiDAO
 		offreur = null;
 		// System.out.println("1");
 		System.out.println("query preparing1...");
-		String sql = "SELECT * FROM CHERCHEUREMPLOI WHERE LOGIN = \"" + login + "\"";
+		String sql = "SELECT * FROM OFFREUREMPLOI WHERE LOGIN = \"" + login + "\"";
 
 		return jdbcTemplate.query(sql, new ResultSetExtractor<OffreurEmploi>()
 		{
@@ -131,6 +131,10 @@ public class OffreurEmploiDAOImpl implements OffreurEmploiDAO
 					offreur.setIdUtilisateur(rs.getLong("IDUTILISATEUR"));
 					offreur.setIdOffreurEmploi(rs.getInt("IDOFFREUREMPLOI"));
 					offreur.setConnectionStatus(rs.getString("CONNECTIONSTATUS"));
+					offreur.setRaisonSociale((String) rs.getString("RAISONSOCIALE"));
+					offreur.setSituationGeographique((String) rs.getString("SITUATIONGEOGRAPHIQUE"));
+					offreur.setDescriptionEntreprise((String) rs.getString("DESCRIPTIONENTREPRISE"));
+					offreur.setAdresse(rs.getString("ADRESSE"));
 					return offreur;
 				}
 				return null;
@@ -138,5 +142,34 @@ public class OffreurEmploiDAOImpl implements OffreurEmploiDAO
 
 		});
 
+	}
+
+	@SuppressWarnings("finally")
+	@Override
+	public long update(OffreurEmploi offreurEmploi)
+	{
+		long ret = -1;
+		// System.out.println("1");
+		System.out.println(offreurEmploi);
+		String sql = "UPDATE OFFREUREMPLOI set IDUTILISATEUR=?,ROLE=?, RAISONSOCIALE=?, SITUATIONGEOGRAPHIQUE=?, DESCRIPTIONENTREPRISE=?, ADRESSE=? ,LOGIN=?,PASSWORD=? ,TELEPHONE=?,EMAIL=?,CONNECTIONSTATUS=? WHERE IDOFFREUREMPLOI=?";
+		try
+		{
+			@SuppressWarnings("unused")
+			int i = jdbcTemplate.update(sql, offreurEmploi.getIdUtilisateur(), offreurEmploi.getRole(),
+					offreurEmploi.getRaisonSociale(), offreurEmploi.getSituationGeographique(),
+					offreurEmploi.getDescriptionEntreprise(), offreurEmploi.getAdresse(), offreurEmploi.getLogin(),
+					offreurEmploi.getPassword(), offreurEmploi.getTelephone(), offreurEmploi.getEmail(),
+					offreurEmploi.getConnectionStatus(), offreurEmploi.getIdOffreurEmploi());
+			ret = this.findByLogin(offreurEmploi.getLogin()).getIdOffreurEmploi();
+			System.out.println("OFFREUREMPLOI mis � jour avec succ�s, le voil�: *****************"
+					+ this.findByLogin(offreurEmploi.getLogin()));
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			return ret;
+		}
 	}
 }

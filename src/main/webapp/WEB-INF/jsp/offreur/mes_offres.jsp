@@ -1,9 +1,15 @@
  		<jsp:include page="../../partials/header.jsp"></jsp:include>
  			<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 		 	<c:if test="${ empty login or login == null  }">
+	 		 	<% 
+	            	request.getServletContext().setAttribute("loggedFirst", 1);
+	            %>
+ 		 		<c:redirect url="connection"/>
+ 		 	</c:if>
 	        <div class="page-title-container style6" style="background-color: #337ab7;">
             <div class="container">
                 <div class="page-title">
-                    <h2 class="entry-title" style="color: yellow;">Liste des offres trouvées</h2>
+                    <h2 class="entry-title" style="color: yellow;">Votre liste d'offre d'emploi</h2>
                 </div>
                 <ul class="breadcrumbs"><!-- 
                     <li><a href="#">Toutes categories</a></li>
@@ -11,9 +17,9 @@
                     <li><a href="#">Partout</a></li> -->
                 </ul>
                 <div class="col-md-3 search-box hidden-xs">
-                    <form method="post" action="${pageContext.request.contextPath}/rechercheCle">
+                    <form>
                         <div class="with-icon full-width">
-                            <input type="text" class="input-text full-width" name="keyword" placeholder="Recherchez une offre avec un mot clé">
+                            <input type="text" class="input-text full-width" placeholder="Recherchez une offre avec un mot clé">
                             <button type="submit" class="icon"><i class="soap-icon-search"></i></button>
                         </div>
                     </form>
@@ -104,11 +110,9 @@
                         <div class="col-sm-8 col-md-9">
                             <div class="hotel-list listing-style3 hotel" style="margin-top: 0px;">
 	                              <c:forEach var="offre" items="${ listeOffres }">  
-	                                <article class="box" style="display: flex;align-items: center;flex-wrap: wrap;">
+	                                <article class="box">
 	                                    <figure class="col-sm-5 col-md-4">
-	                                        <a title="" class="hover-effect text-center">
-	                                        	<img style="max-width: 170px; max-height:170px;" alt="" src="<c:out value="${ pageContext.request.contextPath}/resources/images/logoOffre/${ offre['logoEntreprise']}" />">
-	                                       	</a>
+	                                        <a title="" class="hover-effect"><img width="170" height="100" alt="" src="<c:out value="${ pageContext.request.contextPath}/resources/images/logoOffre/${ offre['logoEntreprise']}" />"></a>
 	                                    </figure>
 	                                    <div class="details col-sm-7 col-md-8">
 	                                        <div>
@@ -129,7 +133,7 @@
 	                                </article>
                               	</c:forEach>
                               	<c:if test="${ listeOffres.size() eq 0 }">
-                              		<h1>Aucune offre d'emploi disponible !</h1>
+                              		<h1>Vous n'avez aucune offre d'emploi disponible !</h1>
                               	</c:if>
                             </div>
                             <c:if test="${ listeOffres.size() gt 0 }">

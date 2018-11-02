@@ -137,7 +137,7 @@
 		                            <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
 		                        </li> --%>
 		                        <li class="menu-item-has-children">
-		                            <a href="${pageContext.request.contextPath}/mon_compte">Mon compte</a>
+		                            <a href="${pageContext.request.contextPath}/infos_chercheur_emploi">Mon compte</a>
 		                        </li>
 			                   <li class="menu-item-has-children">
 			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
@@ -148,7 +148,7 @@
 		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
 		                        </li>
 		                        <li class="menu-item-has-children">
-		                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
+		                            <a href="${pageContext.request.contextPath}/mes_offres">Mes offres</a>
 		                        </li>
 		                        <li class="menu-item-has-children">
 		                            <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
@@ -157,7 +157,7 @@
 		                            <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
 		                        </li>
 		                        <li class="menu-item-has-children">
-		                            <a href="#">Mon compte</a>
+		                            <a href="${pageContext.request.contextPath}/infos_offreur_emploi">Mon compte</a>
 		                        </li>
 			                   <li class="menu-item-has-children">
 			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
@@ -190,7 +190,7 @@
 		                            <a href="${pageContext.request.contextPath}/mes_cvs">Mes CVs</a>
 		                        </li> --%>
 		                        <li class="menu-item-has-children">
-		                            <a href="#">Mon compte</a>
+		                            <a href="${pageContext.request.contextPath}/infos_chercheur_emploi">Mon compte</a>
 		                        </li>
 			                   <li class="menu-item-has-children">
 			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>
@@ -210,7 +210,7 @@
 		                            <a href="${pageContext.request.contextPath}/cv_theque">CV thèques</a>
 		                        </li>
 		                        <li class="menu-item-has-children">
-		                            <a href="#">Mon compte</a>
+		                            <a href="${pageContext.request.contextPath}/infos_offreur_emploi">Mon compte</a>
 		                        </li>
 			                   <li class="menu-item-has-children">
 			                       <a href="${pageContext.request.contextPath}/logout">Deconnexion</a>

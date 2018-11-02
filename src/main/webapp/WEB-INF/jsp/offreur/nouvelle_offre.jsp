@@ -36,38 +36,38 @@
                              <div class="person-information">
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
-                                         <label>Nom de l'emploi <span color: red;> *</span></label>
-                                         <input type="text" required name="category" class="input-text full-width" value="" placeholder="" />
+                                         <label>Nom de l'emploi <span style="color: red;"> *</span></label>
+                                         <input type="text" required name="name" class="input-text full-width" value="${ not empty name ? name : '' }" placeholder="" />
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
-                                         <label>Lieux <span color: red;> *</span></label>
-                                         <input type="text" required name="location" class="input-text full-width" value="" placeholder="" />
+                                         <label>Lieux <span style="color: red;"> *</span></label>
+                                         <input type="text" required name="location" class="input-text full-width" value="${ not empty location ? location : '' }" placeholder="" />
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
-                                         <label>Type d'emploi <span color: red;> *</span></label>
+                                         <label>Type d'emploi <span style="color: red;"> *</span></label>
                                          <div class="selector">
                                              <select required name="type" class="full-width">
                                                  <option value=""></option>
-                                                 <option value="CDD">CDD</option>
-                                                 <option value="CDI">CDI</option>
-                                                 <option value="FREELANCE">Freelance</option>
-                                                 <option value="STAGE">Stage</option>
+                                                 <option value="CDD" ${ type == 'CDD' ? 'selected' : '' }>CDD</option>
+                                                 <option value="CDI" ${ type == 'CDI' ? 'selected' : '' }>CDI</option>
+                                                 <option value="FREELANCE" ${ type == 'FREELANCE' ? 'selected' : '' }>Freelance</option>
+                                                 <option value="STAGE" ${ type == 'STAGE' ? 'selected' : '' }>Stage</option>
                                              </select>
                                          </div>
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
-                                         <label>Profil rechercher <span color: red;> *</span></label>
+                                         <label>Profil rechercher <span style="color: red;"> *</span></label>
                                          <div class="selector">
                                              <select required name="profile" class="full-width">
                                              	<option value=""></option>
                                              	<c:forEach var="profile" items="${ profiles }">
-                                                	<option value="<c:out value="${ profile['idProfilRecherche'] }" />"><c:out value="${ profile['competence'] }" /></option>
+                                                	<option ${ profileString == profile['idProfilRecherche'] ? 'selected' : '' } value="<c:out value="${ profile['idProfilRecherche'] }" />"><c:out value="${ profile['competence'] }" /></option>
                                                  </c:forEach>
                                              </select>
                                          </div>
@@ -75,13 +75,13 @@
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
-                                         <label>Salaire <span color: red;> *</span></label>
-                                         <input type="number" required name="salary" class="input-text full-width" value="" placeholder="" />
+                                         <label>Salaire <span style="color: red;"> *</span></label>
+                                         <input type="number" value="${ not empty salary ? salary : '' }" required name="salary" class="input-text full-width" value="" placeholder="" />
                                      </div>
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
-                                         <label>Logo de l'entreprise  <span color: red;> *</span></label>
+                                         <label>Logo de l'entreprise  <span style="color: red;"> *</span></label>
                                          <input  type="file" name="file" id="file" style="visibility:hidden; height:0" onChange="change()">
 		                                <div class="input-group input-file" name="Fichier_1">
 		                                    <span class="input-group-btn">
@@ -96,8 +96,8 @@
                                  </div>
                                  <div class="form-group row">
                                      <div class="col-sm-12 col-md-12">
-                                         <label>Description <span color: red;> *</span></label>
-									<textarea rows="10" cols="" style="width: 100%;" name="description"></textarea>
+                                         <label>Description <span style="color: red;"> *</span></label>
+									<textarea rows="10" cols="" style="width: 100%;" name="description">${ not empty description ? description : '' }</textarea>
                                      </div>
                                  </div>
                                  <div class="form-group row">

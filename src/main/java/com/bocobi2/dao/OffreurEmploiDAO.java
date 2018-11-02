@@ -5,11 +5,11 @@ import com.bocobi2.model.OffreurEmploi;
 public interface OffreurEmploiDAO
 {
 
-	public long save(OffreurEmploi offreurEmploi) throws Exception; /*
-																	 * 1=Insertion Success and 2=Insertion Failed
-																	 */
+	public long save(OffreurEmploi offreurEmploi) throws Exception;
 
 	public OffreurEmploi findById(int id);
 
 	public OffreurEmploi findByLogin(String login);
+
+	public long update(OffreurEmploi offreurEmploi);
 }

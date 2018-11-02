@@ -29,4 +29,7 @@ target/*
 mvnw
 mvnw.cmd
 
+
 ###F:\BOCOBI2\rencontre\backend\src\main\java\com\bocobi2\rencontre\model\Test.java
+src/main/resources/application.properties
+target/m2e-wtp/web-resources/META-INF/MANIFEST.MF

@@ -145,7 +145,7 @@
 		                            <a href="${pageContext.request.contextPath}/trouver_une_offre">Toutes les offres</a>
 		                        </li>
 		                        <li class="menu-item-has-children">
-		                            <a href="${pageContext.request.contextPath}/mes_demandes">Mes offres</a>
+		                            <a href="${pageContext.request.contextPath}/mes_offres">Mes offres</a>
 		                        </li>
 		                        <li class="menu-item-has-children">
 		                            <a href="${pageContext.request.contextPath}/poster_une_offre">Publier une offre</a>
